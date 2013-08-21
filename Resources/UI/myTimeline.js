@@ -45,7 +45,7 @@ exports.myTimeline = function(json){
 		
 		var video = Titanium.Media.createVideoPlayer({
 			autoplay : true,
-		    backgroundColor : 'blue',
+		    backgroundColor : 'black',
 		    height : 300,
 		    width : 300,
 		    mediaControlStyle : Titanium.Media.VIDEO_CONTROL_DEFAULT,
