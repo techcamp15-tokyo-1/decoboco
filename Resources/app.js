@@ -50,17 +50,17 @@
 	
 	
 	//可視化用
-	var buttonBar = Ti.UI.createLabel({
-		width:"20%",
-		height:Ti.UI.FILL,
-		left:0,
-		backgroundColor:"#000",
-		text:'a',
-		color:"#fff",
-		textAlign:'center'
-	});
-	
-	win_base.add(buttonBar);
+	// var buttonBar = Ti.UI.createLabel({
+		// width:"20%",
+		// height:Ti.UI.FILL,
+		// left:0,
+		// backgroundColor:"#000",
+		// text:'a',
+		// color:"#fff",
+		// textAlign:'center'
+	// });
+// 	
+	// win_base.add(buttonBar);
 	
 	// require('lib/camera').camera();
 	
