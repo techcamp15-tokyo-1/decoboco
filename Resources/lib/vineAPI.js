@@ -1,7 +1,6 @@
 exports.vineLogin = function(username,passwd){
 	
 	var xhr = Ti.Network.createHTTPClient();
-	
 	//login
 	xhr.open('POST','https://api.vineapp.com/users/authenticate');
 	
@@ -54,8 +53,7 @@ exports.userTimeLine = function(){
 	    var json = JSON.parse(this.responseText);
 	    if(json.error != "") alert('error');
 	    else{
-	    	//result
-	    	console.log(json);
+	    	Ti.App.fireEvent('userTimeLineComplete');
 	    	return json;
 	    }
 	};
