@@ -37,7 +37,7 @@
 	}
 
 	//スクロールビューの挿入
-	var scrollview = Ti.UI.createScrollableView({
+	Ti.App.scrollview = Ti.UI.createScrollableView({
 		left:"20%",
 		width:"80%",
 		height:Ti.UI.FILL,
@@ -46,7 +46,7 @@
         // pagingControlHeight: 30,
 	});
 	
-	win_base.add(scrollview);
+	win_base.add(Ti.App.scrollview);
 	
 	
 	//可視化用
@@ -59,15 +59,16 @@
 		color:"#fff",
 		textAlign:'center'
 	});
+	
 	win_base.add(buttonBar);
 	
 	// require('lib/camera').camera();
 	
 	//これに入ったら各処理させる
 	Ti.App.addEventListener('loginComplete',function(){
-		var json = require('lib/vineAPI').userTimeLine();
-		console.log(json);
-		require('UI/myTimeline').myTimeline(json);
+		console.log('login');
+		require('UI/myTimeline').myTimeline();
+		// scrollview.views[0].add(require('UI/myTimeline').myTimeline());
 	});
 	
 })();
