@@ -2,6 +2,10 @@
 
 (function(){
 	
+	// var b = require('com.HjAboutHiroppy.VineCamera');
+	// var v = b.createView();
+	// console.log(v);
+	
 	require('lib/vineAPI').vineLogin('dreams.come.true.about@gmail.com','about19920429');
 	// require('lib/vineAPI').vineLogin('e.takumi.89@gmail.com','8Gatu9Ka');
 	
@@ -38,8 +42,8 @@
 
 	//スクロールビューの挿入
 	Ti.App.scrollview = Ti.UI.createScrollableView({
-		left:"20%",
-		width:"80%",
+		// left:"20%",
+		width:Ti.UI.FILL,
 		height:Ti.UI.FILL,
 		views:dummyWindow,
 		// showPagingControl: true,
