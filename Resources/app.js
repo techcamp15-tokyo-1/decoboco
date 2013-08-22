@@ -41,10 +41,13 @@
 
 	//スクロールビューの挿入
 	Ti.App.scrollview = Ti.UI.createScrollableView({
+<<<<<<< HEAD
 		// left:"10%",
 		top:"10%",
 		width:"100%",
 		height:"80%",
+=======
+>>>>>>> ff9b7caa38166f36941d48817e59587fec545a61
 		// left:"20%",
 		width:Ti.UI.FILL,
 		height:Ti.UI.FILL,
