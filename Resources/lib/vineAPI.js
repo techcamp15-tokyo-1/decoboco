@@ -13,12 +13,14 @@ exports.vineLogin = function(username,passwd){
 	    var json = JSON.parse(this.responseText);
 	    if(json.error != "") alert('error');
 	    else{
+	    	// console.log(json);
 	    	Ti.App.key = json.data.key;
 	    	Ti.App.userId = json.data.userId;
+	    	Ti.App.username = json.data.username;
 	    }
 	    Ti.App.fireEvent('loginComplete');
 	};
-}
+};
 
 exports.vinePopularTimeLine = function(){
 	var xhr = Ti.Network.createHTTPClient();
@@ -37,7 +39,7 @@ exports.vinePopularTimeLine = function(){
 	    	console.log(json);
 	    }
 	};
-}
+};
 
 exports.userTimeLine = function(){
 	var xhr = Ti.Network.createHTTPClient();
@@ -57,4 +59,4 @@ exports.userTimeLine = function(){
 	    	return json;
 	    }
 	};
-}
+};
