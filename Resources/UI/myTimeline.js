@@ -216,7 +216,7 @@ exports.myTimeline = function(json){
 				height:25,
 			});
 			
-<<<<<<< HEAD
+
 			shareButton.addEventListener('singletap',function(){
 				Ti.UI.Clipboard.clearText();
 				Ti.UI.Clipboard.setText(json.data.records[i].shareUrl);
@@ -224,9 +224,8 @@ exports.myTimeline = function(json){
 				//message 
 				
 			});
-			
-=======
->>>>>>> ff9b7caa38166f36941d48817e59587fec545a61
+
+
 			buttonView.add(likeButton);
 			buttonView.add(commentButton);
 			buttonView.add(shareButton);
