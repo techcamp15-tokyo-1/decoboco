@@ -38,30 +38,51 @@
 
 	//スクロールビューの挿入
 	Ti.App.scrollview = Ti.UI.createScrollableView({
-		left:"20%",
-		width:"80%",
-		height:Ti.UI.FILL,
+		// left:"10%",
+		top:"10%",
+		width:"100%",
+		height:"80%",
 		views:dummyWindow,
 		// showPagingControl: true,
         // pagingControlHeight: 30,
 	});
 	
-	win_base.add(Ti.App.scrollview);
+	  win_base.add(Ti.App.scrollview);
 	
 	
 	//可視化用
-	// var buttonBar = Ti.UI.createLabel({
-		// width:"20%",
-		// height:Ti.UI.FILL,
-		// left:0,
-		// backgroundColor:"#000",
-		// text:'a',
-		// color:"#fff",
-		// textAlign:'center'
-	// });
-// 	
-	// win_base.add(buttonBar);
+	var buttonBar = Ti.UI.createLabel({
+		width:"100%",
+		height:"10%",
+		bottom:0,
+		backgroundColor:"#00ccff",
+		text:'ボタン三つ',
+		color:"#fff",
+		textAlign:'center'
+	});
 	
+	//上部ラベル
+		var topLabel = Ti.UI.createLabel({
+		width:"100%",
+		height:"10%",
+		top:0,
+		backgroundColor:"#00ccff",
+		text:'ラベル',
+		color:"#fff",
+		textAlign:'center'
+	});
+	
+	///////////////////////////////////////////////
+	//Labelとscrollableview
+	// label.text = "TL";
+	
+	
+	
+	///////////////////////////////////////////////
+	
+// 	
+		win_base.add(buttonBar);
+	    win_base.add(topLabel);
 	// require('lib/camera').camera();
 	
 	//これに入ったら各処理させる
