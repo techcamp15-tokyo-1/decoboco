@@ -108,9 +108,15 @@
 	///////////////////////////////////////////////
 	//Labelとscrollableview
 		var topLabelNameArray = [];
-			topLabelNameArray[0]= "TL";
-			topLabelNameArray[1]= "TLTL";
-			topLabelNameArray[2]= "TLTLTL";
+			topLabelNameArray[0]= "Time Line";
+			topLabelNameArray[1]= "Take Movie";
+			topLabelNameArray[2]= "Tags";
+			topLabelNameArray.font = {
+				fontSize : 17,
+				fontFamily : 'AppleGothic'
+			};
+		
+		// font: { fontSize: 17, fontFamily: 'AppleGothic', } ,
 		
 		Ti.App.scrollview.addEventListener('scroll',function(e){
 			if(e.currentPage != undefined){
