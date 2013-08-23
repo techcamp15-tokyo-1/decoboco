@@ -3,6 +3,7 @@ exports.myTimeline = function(json){
 		width:Ti.UI.FILL,
 		height:Ti.UI.FILL,	
 		selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
+		backgroundColor:"#ffffff"
 	});
 	
 	tableview.addEventListener('click',function(e){
@@ -135,10 +136,10 @@ exports.myTimeline = function(json){
 			// +9hさせる
 			
 			var timeLabel = Ti.UI.createLabel({
-				right:5,
+				right:10,
 				top:305,
 				text:day_parts[0]+" "+day_parts[1]+" "+day_parts[2]+" "+time[0]+":"+time[1],
-				font: { fontSize: 14, fontFamily: 'AppleGothic', } ,
+				font: { fontSize: 15, fontFamily: 'AppleGothic', } ,
 				textAlign: 'right',
 				color:"#111",
 			});
@@ -155,7 +156,7 @@ exports.myTimeline = function(json){
 				left:55,
 				top:315,
 				text:json.data.records[i].username,
-				font: { fontSize: 18, fontFamily: 'AppleGothic', } ,
+				font: { fontSize: 15, fontFamily: 'AppleGothic', } ,
 				textAlign: 'left',
 				color:"#111"
 			});
@@ -166,7 +167,7 @@ exports.myTimeline = function(json){
 				left:55,
 				width:Titanium.Platform.displayCaps.platformWidth - 55 - 5, //-5 は右の空白分
 				height:Ti.UI.SIZE,
-				borderColor:"#ff00ff",
+				// borderColor:"#ff00ff",
 				layout:"vertical"
 			});
 			
@@ -175,7 +176,7 @@ exports.myTimeline = function(json){
 					left:0,
 					top:0,
 					text:json.data.records[i].description,
-					font: { fontSize: 20, fontFamily: 'AppleGothic', } ,
+					font: { fontSize: 17, fontFamily: 'AppleGothic', } ,
 					textAlign: 'left',
 					color:"#111"
 				});	
@@ -186,36 +187,53 @@ exports.myTimeline = function(json){
 				width:Ti.UI.FILL,
 				height:Ti.UI.SIZE,
 				top:2,
+				bottom:5,
 				layout:"horizontal"
 			});
 			
+			
+			// createImage = function(image,size){
+				// var button = Ti.UI.createButton({
+					// backgroundImage : image,
+					// left:size,
+					// width:45,
+				    // height:30,
+				// });
+				// return button;
+			// };
+// 			
+			// var likeButton = createImages("/images/thumbs_up.png",0);
+			// var commentButton = createImages("/images/comments.png",25);
+			// var shareButton = createImages("/images/shares.png",25);
+// 			
 			var likeButton = Ti.UI.createButton({
-				title:"like",
+				//title:"like",
+				backgroundImage : "/images/thumbs_up.png",
+				width:45,//45
+				height:20,//25
+				left:10,				
+			});
+			
+			var commentButton = Ti.UI.createButton({
+				//title:"comment",
+				backgroundImage : "/images/comment.png",
+				left:20,
 				width:45,
-				height:25,
-				left:0
-				
+				height:20,
+			});
+			
+			//copy this row's url
+			var shareButton = Ti.UI.createButton({
+				//title:"share",
+				backgroundImage : "/images/share.png",
+				left:20,
+				width:45,
+				height:20,
 			});
 			
 			likeButton.addEventListener('singletap',function(){
 				console.log("like");
 			});
-			
-			var commentButton = Ti.UI.createButton({
-				title:"comment",
-				left:10,
-				width:45,
-				height:25,
-			});
-			
-			//copy this row's url
-			var shareButton = Ti.UI.createButton({
-				title:"share",
-				left:10,
-				width:45,
-				height:25,
-			});
-			
 
 			shareButton.addEventListener('singletap',function(){
 				Ti.UI.Clipboard.clearText();
@@ -233,9 +251,10 @@ exports.myTimeline = function(json){
 			//もし自分の投稿なら消すボタンの設置
 			if(Ti.App.username == json.data.records[i].username){
 				var deleteButton = Ti.UI.createButton({
-					title:"delete",
-					left:10,
-					width:45,
+					//title:"delete",
+					backgroundImage : "/images/remove.png",
+					left:25,
+					width:40,
 					height:25,
 				});
 				buttonView.add(deleteButton);
