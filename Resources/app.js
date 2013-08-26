@@ -1,4 +1,5 @@
 //将来的にxmlにパスワードとusernameを保存する
+//他のwindowへのアクセス方法　Ti.App.scrollview.views[index]
 
 (function(){
 	
@@ -153,17 +154,25 @@
 		win_base.add(buttonBar);
 	    win_base.add(topLabel);
 	// require('lib/camera').camera();
-	
 	//これに入ったら各処理させる
 	Ti.App.addEventListener('loginComplete',function(){
 		console.log('login');
-		require('UI/myTimeline').myTimeline();
-		// scrollview.views[0].add(require('UI/myTimeline').myTimeline());
+		
+		require('lib/vineAPI').vinePopularTimeLine();
+		
+		// Ti.App.scrollview.views[0].add(require('UI/myTimeline').myTimeline());
 		//test
+		//require('UI/newLogin').newLogin();
 		require('UI/myProfile').myProfile();
-		require('lib/vineAPI').myProfile();
-		//require('lib/vineAPI').tag();
+		 require('lib/vineAPI').myProfile();
+		
+		//require('lib/vineAPI').userData();
 		
 	});
+	
+	// Ti.App.addEventListener('userTimeLineComplete',function(e){
+		// console.log("---------------------------------------");
+		// console.log(e);
+	// });
 	
 })();

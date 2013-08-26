@@ -10,10 +10,11 @@ exports.vineLogin = function(username,passwd){
 	});
 	
 	xhr.onload = function(){
-	    var json = JSON.parse(this.responseText);
+		var str = require('lib/prepareParse').prepareParse(this.responseText);
+		var json = JSON.parse(str);
 	    if(json.error != "") alert('error');
 	    else{
-	    	// console.log(json);
+	    	console.log(json);
 	    	Ti.App.key = json.data.key;
 	    	Ti.App.username = json.data.username;
 	    }
@@ -31,34 +32,20 @@ exports.vinePopularTimeLine = function(){
 	xhr.send();
 	
 	xhr.onload = function(){
-	    var json = JSON.parse(this.responseText);
-	    if(json.error != "") alert('error');
-	    else{
-	    	//result
-	    	console.log(json);
-	    }
+		// var str = require('lib/prepareParse').prepareParse(this.responseText);
+		// var json = JSON.parse(str);
+	    // if(json.error != "") alert('error');
+	    // else{
+	    	// //result
+			// // console.log(json);
+			// // return json;
+	    // }
 	};
 };
 
-exports.userTimeLine = function(){
-	var xhr = Ti.Network.createHTTPClient();
-	var str = Ti.App.key.split('-');
-	xhr.open('GET','https://api.vineapp.com/timelines/users/'+str[0]);
-	
-	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
-	xhr.setRequestHeader('vine-session-id',Ti.App.key);
-	
-	xhr.send();
-	
-	xhr.onload = function(){
-	    var json = JSON.parse(this.responseText);
-	    if(json.error != "") alert('error');
-	    else{
-	    	Ti.App.fireEvent('userTimeLineComplete');
-	    	return json;
-	    }
-	};
-};
+
+// var str = require('lib/prepareParse').prepareParse(this.responseText);
+// var json = JSON.parse(str);
 
 //me 
 exports.myProfile = function(){
@@ -71,7 +58,8 @@ exports.myProfile = function(){
 	xhr.send();
 	
 	xhr.onload = function(){
-	    var json = JSON.parse(this.responseText);
+		var str = require('lib/prepareParse').prepareParse(this.responseText);
+		var json = JSON.parse(str);
 	    if(json.error != "") alert('error');
 	    else{
 	    	xhr = null;
@@ -81,27 +69,28 @@ exports.myProfile = function(){
 	};
 };
 
-
-exports.userData = function(userid){
-	var xhr = Ti.Network.createHTTPClient();
-	xhr.open('GET','https://api.vineapp.com/users/profiles/'+userid);
-	console.log(userid);
-	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
-	
-	xhr.setRequestHeader('vine-session-id',Ti.App.key);
-	
-	xhr.send();
-	
-	xhr.onload = function(){
-	    var json = JSON.parse(this.responseText);
-	    if(json.error != "") alert('error');
-	    else{
-	    	xhr = null;
-	    	console.log(json);
-	    	// return json;
-	    }
-	};
-};
+// 
+// exports.userData = function(userid){/////////error
+	// var xhr = Ti.Network.createHTTPClient();
+	// xhr.open('GET','https://api.vineapp.com/users/profiles/'+userid);
+	// console.log(userid);
+	// // xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
+// 	
+	// xhr.setRequestHeader('vine-session-id',Ti.App.key);
+// 	
+	// xhr.send();
+// 	
+	// xhr.onload = function(){
+		// var str = require('lib/prepareParse').prepareParse(this.responseText);
+		// var json = JSON.parse(str);
+	    // if(json.error != "") alert('error');
+	    // else{
+	    	// xhr = null;
+	    	// console.log(json);
+	    	// // return json;
+	    // }
+	// };
+// };
 
 
 exports.tag = function(tag){
@@ -114,7 +103,8 @@ exports.tag = function(tag){
 	xhr.send();
 	
 	xhr.onload = function(){
-	    var json = JSON.parse(this.responseText);
+		var str = require('lib/prepareParse').prepareParse(this.responseText);
+		var json = JSON.parse(str);
 	    if(json.error != "") alert('error');
 	    else{
 	    	Ti.App.fireEvent('userTagComplete');
@@ -127,7 +117,7 @@ exports.tag = function(tag){
 
 exports.singlePost = function(postid){
 	var xhr = Ti.Network.createHTTPClient();
-	xhr.open('GET','https://api.vineapp.com/imelines/posts/'+str[0]);//<postid>
+	xhr.open('GET','https://api.vineapp.com/imelines/posts/'+str[0]+'/thumbs');//<postid>
 	
 	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
 	xhr.setRequestHeader('vine-session-id',Ti.App.key);
@@ -135,7 +125,8 @@ exports.singlePost = function(postid){
 	xhr.send();
 	
 	xhr.onload = function(){
-	    var json = JSON.parse(this.responseText);
+		var str = require('lib/prepareParse').prepareParse(this.responseText);
+		var json = JSON.parse(str);
 	    if(json.error != "") alert('error');
 	    else{
 	    	Ti.App.fireEvent('singlePostComplete');

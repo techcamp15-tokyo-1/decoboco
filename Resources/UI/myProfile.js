@@ -1,10 +1,4 @@
 exports.myProfile = function(json){
-	var mainView = Ti.UI.createView({
-		width:Ti.UI.FILL,
-		height:Ti.UI.FILL,	
-		//selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,//TableViewCellSelectionStyle
-		backgroundColor:"#ffffff"
-	});
 
 	var xhr = Ti.Network.createHTTPClient();
 	xhr.open('GET','https://api.vineapp.com/users/me');
@@ -15,75 +9,119 @@ exports.myProfile = function(json){
 	xhr.send();
 
 	xhr.onload = function(){
-	    var json = JSON.parse(this.responseText);
+		var str = require('lib/prepareParse').prepareParse(this.responseText);
+		var json = JSON.parse(str);
+
 	    if(json.error != "") alert('error');
 	    else{
-	    	Ti.App.fireEvent('GetProfileComplete');
+	    	console.log("------line23------------ myprofile----------");
+	    	//Ti.App.fireEvent('GetProfileComplete');
+	    	//console.log(json);
 	    	// console.log(json.data.records[0].videoUrl)
-	    	mainView.data = createView(json);								////////////////////////////
-	    	Ti.App.scrollview.views[3].add(mainView);
+	    	var v = createView(json);								////////////////////////////
+	    	Ti.App.scrollview.views[3].add(v);
 	    }
 	};
 	
 	function createView(json){
+		
 		var profView = Ti.UI.createView({
 				width:Ti.UI.FILL,
-				height:Ti.UI.SIZE,
+				height:Ti.UI.FILL,
+				layout:"vertical",
+				top:0,
+				color:"#ffffff"
 			});
+
+			console.log(json);
 			
 			var profileImage = Ti.UI.createImageView({
-				left:5,
-				top:315,
-				width:80,
-				height:80,
-				//image:json.data.records[i].avatarUrl
+				Align:'center',
+				top:"3%",
+				borderColor:"#345600",
+				width:90,
+				height:90,
+				image:json.data.avatarUrl
 			});
 			
 			var usernameLabel = Ti.UI.createLabel({
-				left:55,
-				top:315,
-				//text:json.data.records[i].username,
-				font: { fontSize: 15, fontFamily: 'AppleGothic', } ,
-				textAlign: 'left',
-				color:"#111"
+				top:"3%",
+				text:json.data.username,
+				font: { fontSize: 20, fontFamily: 'AppleGothic', } ,
+				textAlign: 'center',
+				color:"#000"
+			});
+			
+			var userIdLabel = Ti.UI.createLabel({
+				top:"1%",
+				text:"@"+json.data.username,
+				font: { fontSize: 12, fontFamily: 'AppleGothic', } ,
+				textAlign: 'center',
+				color:"#000"
+			});
+			
+			var profileTextLabel = Ti.UI.createLabel({
+				top:"5%",
+				width:"60%",
+				height:Ti.UI.SIZE,
+				
+				text:"Twitter/Facebook/Mr.Chirdren/Mr.Babies/takumi/abcde/fghij/klmno/pqrst/uvwxy/z",
+				// text:json.data.records.username;
+				font: { fontSize: 15, 
+						fontFamily: 'AppleGothic',
+						} ,
+				//textAlign:'center',
+				color:"#000",
+				
 			});
 			
 			var buttonView = Ti.UI.createView({
 				width:Ti.UI.FILL,
-				height:Ti.UI.SIZE,
-				top:2,
-				bottom:5,
+				top:"10%",
+				height:35,
+				// top:,
+				// bottom:,
 				layout:"horizontal"
 			});
-					
-			createImages = function(title,left){
-			var button = Ti.UI.createButton({
-				color : "#ffffff",
-				title : title,
-				left:left,
-				width:"25%",
-			    height:"10%",
-			});
-			return button;
-		};
+			
+			createLabel = function(text,left){
+				var button = Ti.UI.createLabel({
+					color : "#000000",
+					backgroundColor:"#00ccff",
+					borderColor:"#345600",
+					font: { fontSize: 15, 
+							fontFamily: 'AppleGothic', 
+							} ,
+					text : text,
+					textAlign:'center',
+					left:left,
+					width:"40%",
+				    height:30
+				});
+				return button;
+			};
 
-		var followersButton = createImages("FOLLOWERS","25%");
-		var followingButton = createImages("FOLLOWING",0);
+		var followersButton = createLabel("FOLLOWERS","10%");
+		var followingButton = createLabel("FOLLOWING","2%");
 				
 			followersButton.addEventListener('singletap',function(){
 				console.log("Followers");
 			});
-			followersButton.addEventListener('singletap',function(){
+			
+			followingButton.addEventListener('singletap',function(){
 				console.log("Following");
 			});			
-	
+		
+		profView.add(profileImage);
+		profView.add(usernameLabel);
+		profView.add(userIdLabel);
+		profView.add(profileTextLabel);
+
+		
 		buttonView.add(followersButton);
 		buttonView.add(followingButton);	
 		
-		
-		mainView.add(buttonView);
-			
+		profView.add(buttonView);
+	return profView;
 	}
-	
-
 };
