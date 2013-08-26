@@ -24,6 +24,7 @@ exports.myProfile = function(json){
 	};
 	
 	function createView(json){
+		
 		var profView = Ti.UI.createView({
 				width:Ti.UI.FILL,
 				height:Ti.UI.FILL,
@@ -106,6 +107,7 @@ exports.myProfile = function(json){
 			followersButton.addEventListener('singletap',function(){
 				console.log("Followers");
 			});
+			
 			followingButton.addEventListener('singletap',function(){
 				console.log("Following");
 			});			
