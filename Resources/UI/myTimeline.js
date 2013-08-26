@@ -1,4 +1,4 @@
-exports.myTimeline = function(json){
+exports.myTimeline = function(){
 	var tableview = Ti.UI.createTableView({
 		width:Ti.UI.FILL,
 		height:Ti.UI.FILL,	
@@ -63,10 +63,15 @@ exports.myTimeline = function(json){
 	    var json = JSON.parse(this.responseText);
 	    if(json.error != "") alert('error');
 	    else{
-	    	Ti.App.fireEvent('userTimeLineComplete');
+	    	// Ti.App.fireEvent('userTimeLineComplete');
 	    	// console.log(json.data.records[0].videoUrl);
+	    	
+	    	//insert
 	    	tableview.data = createRow(json);
+	    	
 	    	Ti.App.scrollview.views[0].add(tableview);
+	    	// return tableview;
+	    	// return tableview;
 	    }
 	};
 	
