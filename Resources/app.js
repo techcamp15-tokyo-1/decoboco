@@ -5,7 +5,7 @@
 	
 	///////////
 	// require('lib/vineAPI').vineNewLogin('e.takumi.89@gmail.com','techcamptech','TechcampTakumi');
-	require('lib/vineAPI').vineNewLogin('higezizii-tansoku-choko-about@about-hiroppy.com','about19920429','about_hiroppy_test');
+	//require('lib/vineAPI').vineNewLogin('higezizii-tansoku-choko-about@about-hiroppy.com','about19920429','about_hiroppy_test');
 	// var b = require('com.HjAboutHiroppy.VineCamera');
 	// var v = b.createView();
 	// console.log(v);
@@ -39,7 +39,6 @@
 			width:"100%",
 			height:Ti.UI.FILL,
 			backgroundColor:"#ddd",
-			borderColor:"#fff000"
 		});
 		dummyWindow.push(w);	
 	}
@@ -115,7 +114,7 @@
 		height:"10%",
 		top:0,
 		backgroundColor:"#00a478",
-		text:"Time Line",
+		text:"TIMELINE",
 		font:{
 			fontWeight: "normal", 
 			fontSize: 25, 
@@ -140,10 +139,11 @@
 	///////////////////////////////////////////////
 	//Labelとscrollableview
 	var topLabelNameArray = [];
-	topLabelNameArray[0]= "Time Line";
-	topLabelNameArray[1]= "Take Movie";
-	topLabelNameArray[2]= "Best Vines";
-	topLabelNameArray[3]= "Profile";
+	topLabelNameArray[0]= "TIMELINE";
+	topLabelNameArray[1]= "ACTIVITY";
+	topLabelNameArray[2]= "EXPLOPE";
+	topLabelNameArray[3]= "PROFILE";
+	
 	
 	Ti.App.scrollview.addEventListener('scroll',function(e){
 		if(e.currentPage != undefined){
@@ -166,8 +166,8 @@
 		// Ti.App.scrollview.views[0].add(require('UI/myTimeline').myTimeline());
 		//test
 		//require('UI/newLogin').newLogin();
-		// require('UI/myProfile').myProfile();
-		// require('lib/vineAPI').myProfile();
+		require('UI/myProfile').myProfile();
+		require('lib/vineAPI').myProfile();
 		
 		require('lib/vineAPI').vineGraphTimeLine();
 		//require('lib/vineAPI').userData();

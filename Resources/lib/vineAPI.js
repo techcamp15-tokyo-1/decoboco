@@ -120,6 +120,7 @@ exports.myProfile = function(){
 		var json = JSON.parse(str);
 	    if(json.error != "") alert('error');
 	    else{
+	    	
 	    	xhr = null;
 	    	// console.log(json);
 	    	// return json;
