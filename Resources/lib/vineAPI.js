@@ -7,25 +7,23 @@ exports.vineNewLogin = function(email,password,username){
 	// xhr.open('POST','https://api.vineapp.com/users?authenticate=');
 	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.1.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
 	
-	// authenticate=1&email=hogefuga%40live.com&password=hoge11fuga&username=Testtest
+
 	xhr.send({
+		username:username,
+		password:password,
+		email:email,
 		authenticate:1,
-		email:this.email,
-		password:this.password,
-		username:this.username,
 	});
 
 	xhr.onload = function(){
-		console.log(this.responseText);
 		var str = require('lib/prepareParse').prepareParse(this.responseText);
 		// console.log(this.responseText);
 		
 		var json = JSON.parse(str);
+		
 	    if(json.error != "") alert('error');
 	    else{
-	    	console.log('--------------------------------------------');
 	    	console.log(json);
-	    	console.log('--------------------------------------------');
 	    	// Ti.App.key = json.data.key;
 	    	// Ti.App.username = json.data.username;
 	    }
@@ -69,8 +67,10 @@ exports.vineGraphTimeLine = function(){
 	xhr.send();
 	
 	xhr.onload = function(){
-		var str = require('lib/prepareParse').prepareParse(this.responseText);
-		var json = JSON.parse(str);
+		
+		// var str = require('lib/prepareParse').prepareParse(this.responseText);
+		// var json = JSON.parse(str);
+		var json = JSON.parse(this.responseText);
 	    if(json.error != "") alert('error');
 	    else{
 	    	var data = require('lib/parseJson').parseJson(json);
