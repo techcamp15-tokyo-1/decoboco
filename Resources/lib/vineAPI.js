@@ -1,4 +1,41 @@
-exports.vineLogin = function(username,passwd){
+exports.vineNewLogin = function(email,password,username){
+
+	var xhr = Ti.Network.createHTTPClient();
+	//login
+	xhr.open('POST','https://api.vineapp.com/users');
+	// xhr.setRequestHeader('vine-session-id',Ti.App.key);
+	// xhr.open('POST','https://api.vineapp.com/users?authenticate=');
+	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.1.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
+	
+	// authenticate=1&email=hogefuga%40live.com&password=hoge11fuga&username=Testtest
+	xhr.send({
+		authenticate:1,
+		email:this.email,
+		password:this.password,
+		username:this.username,
+	});
+
+	xhr.onload = function(){
+		console.log(this.responseText);
+		var str = require('lib/prepareParse').prepareParse(this.responseText);
+		// console.log(this.responseText);
+		
+		var json = JSON.parse(str);
+	    if(json.error != "") alert('error');
+	    else{
+	    	console.log('--------------------------------------------');
+	    	console.log(json);
+	    	console.log('--------------------------------------------');
+	    	// Ti.App.key = json.data.key;
+	    	// Ti.App.username = json.data.username;
+	    }
+	};
+};
+
+
+
+
+exports.vineLogin = function(username,password){
 	
 	var xhr = Ti.Network.createHTTPClient();
 	//login
@@ -6,7 +43,7 @@ exports.vineLogin = function(username,passwd){
 	
 	xhr.send({
 	    username: username,
-	    password: passwd
+	    password: password
 	});
 	
 	xhr.onload = function(){
@@ -14,7 +51,7 @@ exports.vineLogin = function(username,passwd){
 		var json = JSON.parse(str);
 	    if(json.error != "") alert('error');
 	    else{
-	    	console.log(json);
+	    	// console.log(json);
 	    	Ti.App.key = json.data.key;
 	    	Ti.App.username = json.data.username;
 	    }
@@ -22,10 +59,31 @@ exports.vineLogin = function(username,passwd){
 	};
 };
 
+exports.vineGraphTimeLine = function(){
+	var xhr = Ti.Network.createHTTPClient();
+	xhr.open('GET','https://api.vineapp.com/timelines/graph');
+	
+	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
+	xhr.setRequestHeader('vine-session-id',Ti.App.key);
+	
+	xhr.send();
+	
+	xhr.onload = function(){
+		var str = require('lib/prepareParse').prepareParse(this.responseText);
+		var json = JSON.parse(str);
+	    if(json.error != "") alert('error');
+	    else{
+	    	var data = require('lib/parseJson').parseJson(json);
+	    	console.log(require('UI/timelineTemplete').tableTemplete(data));
+	    	Ti.App.scrollview.views[0].add(require('UI/timelineTemplete').tableTemplete(data));
+	    }
+	};
+};
+
 exports.vinePopularTimeLine = function(){
 	var xhr = Ti.Network.createHTTPClient();
 	xhr.open('GET','https://api.vineapp.com/timelines/popular?size=1');
-		
+	
 	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
 	xhr.setRequestHeader('vine-session-id',Ti.App.key);
 	
@@ -36,9 +94,9 @@ exports.vinePopularTimeLine = function(){
 		// var json = JSON.parse(str);
 	    // if(json.error != "") alert('error');
 	    // else{
-	    	// //result
-			// // console.log(json);
-			// // return json;
+	    // //result
+		// // console.log(json);
+		// // return json;
 	    // }
 	};
 };
@@ -54,7 +112,7 @@ exports.myProfile = function(){
 	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
 	
 	xhr.setRequestHeader('vine-session-id',Ti.App.key);
-		
+	
 	xhr.send();
 	
 	xhr.onload = function(){
@@ -63,7 +121,7 @@ exports.myProfile = function(){
 	    if(json.error != "") alert('error');
 	    else{
 	    	xhr = null;
-	    	console.log(json);
+	    	// console.log(json);
 	    	// return json;
 	    }
 	};
@@ -71,25 +129,25 @@ exports.myProfile = function(){
 
 // 
 // exports.userData = function(userid){/////////error
-	// var xhr = Ti.Network.createHTTPClient();
-	// xhr.open('GET','https://api.vineapp.com/users/profiles/'+userid);
-	// console.log(userid);
-	// // xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
+// var xhr = Ti.Network.createHTTPClient();
+// xhr.open('GET','https://api.vineapp.com/users/profiles/'+userid);
+// console.log(userid);
+// // xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
 // 	
-	// xhr.setRequestHeader('vine-session-id',Ti.App.key);
+// xhr.setRequestHeader('vine-session-id',Ti.App.key);
 // 	
-	// xhr.send();
+// xhr.send();
 // 	
-	// xhr.onload = function(){
-		// var str = require('lib/prepareParse').prepareParse(this.responseText);
-		// var json = JSON.parse(str);
-	    // if(json.error != "") alert('error');
-	    // else{
-	    	// xhr = null;
-	    	// console.log(json);
-	    	// // return json;
-	    // }
-	// };
+// xhr.onload = function(){
+// var str = require('lib/prepareParse').prepareParse(this.responseText);
+// var json = JSON.parse(str);
+// if(json.error != "") alert('error');
+// else{
+// xhr = null;
+// console.log(json);
+// // return json;
+// }
+// };
 // };
 
 
@@ -108,7 +166,7 @@ exports.tag = function(tag){
 	    if(json.error != "") alert('error');
 	    else{
 	    	Ti.App.fireEvent('userTagComplete');
-	    	console.log(json);
+	    	// console.log(json);
 	    	return json;
 	    }
 	};
@@ -117,7 +175,7 @@ exports.tag = function(tag){
 
 exports.singlePost = function(postid){
 	var xhr = Ti.Network.createHTTPClient();
-	xhr.open('GET','https://api.vineapp.com/imelines/posts/'+str[0]+'/thumbs');//<postid>
+	xhr.open('GET','https://api.vineapp.com/timelines/posts/'+str[0]+'/thumbs');//<postid>
 	
 	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
 	xhr.setRequestHeader('vine-session-id',Ti.App.key);
@@ -135,4 +193,22 @@ exports.singlePost = function(postid){
 	};
 };
 
+exports.PostLike = function(id){
+	var xhr = Ti.Network.createHTTPClient();
+	xhr.open('POST','https://api.vineapp.com/posts/'+id+'/likes');//<postid>
+	
+	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
+	xhr.setRequestHeader('vine-session-id',Ti.App.key);
+	
+	xhr.send();
+	
+	xhr.onload = function(){
+		var str = require('lib/prepareParse').prepareParse(this.responseText);
+		var json = JSON.parse(str);
+	    if(json.error != "") alert('error');
+	    else{
+	    	console.log(json);
+	    }
+	};	
+};
 
