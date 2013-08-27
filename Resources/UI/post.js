@@ -1,12 +1,17 @@
 exports.postWindow = function(){
-	var mainView = Ti.UI.createView({
+	var mainView = Ti.UI.createWindow({
 		width:"100%",
 		height:"100%",
-		backgroundColor:"#00ffff"
+		backgroundColor:"#888888",
+		modal:true,
+		modalTransitionStyle: Ti.UI.iPhone.MODAL_TRANSITION_STYLE_FLIP_HORIZONTAL,
+    	modalStyle: Ti.UI.iPhone.MODAL_PRESENTATION_FULLSCREEN,
 	});
 	
-	var vineCamera = require('com.HjAboutHiroppy.VineCamera');
+	mainView.open();
 	
+	var vineCamera = require('com.HjAboutHiroppy.VineCamera');
+	console.log("---------------"+vineCamera+"------------------------");
 	var vineCameraView = vineCamera.createView({
 		width:"100%",
 		height:"50%",
@@ -101,7 +106,52 @@ exports.postWindow = function(){
 	});
 	
 	mainView.add(vineCameraView);	
-	mainView.add(textLabel);
+	// mainView.add(textLabel);
 	
-	return mainView;
+	var button = Ti.UI.createButton({
+		bottom:40,
+		left:"50%",
+		width:50,
+		height:50	
+	});
+	
+	mainView.add(button);
+	button.addEventListener('singletap',function(){
+		mainView.close();
+		// vineCamera = null;
+		// mainView = null;
+	});
+	
+	var fbutton = Ti.UI.createButton({
+		bottom:40,
+		left:"30%",
+		width:50,
+		height:50,
+		title:"finish"
+	});
+	
+	// mainView.add(fbutton);
+	
+	fbutton.addEventListener('singletap',function(){
+		vineCamera.stopButtonPressed();	
+		console.log("------------------------line137------------------------");
+		var wwindow = Ti.UI.createWindow({
+			width:Ti.UI.FILL,
+			height:Ti.UI.FILL,
+			backgroundColor:"#00ffff"
+		});
+		wwindow.open();
+		
+		var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,'capture0.mp4');
+		var video = Titanium.Media.createVideoPlayer({
+		    movieControlMode:Titanium.Media.VIDEO_CONTROL_DEFAULT,
+		    scalingMode:Titanium.Media.VIDEO_SCALING_ASPECT_FILL,
+		    //contentURL:movieFile.nativePath
+		    media:file
+		});
+		video.play();
+		wwindow.add(video);
+		mainView.add(wwindow);
+	});
+	
 };
