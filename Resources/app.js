@@ -19,7 +19,7 @@
 	tab_group = Ti.UI.createTabGroup();
 	
 	//一番下のベースLayer
-	var win_base = Ti.UI.createWindow({
+	Ti.App.win_base = Ti.UI.createWindow({
 		// backgroundImage: 'image/background.jpg',
 		backgroundColor:"#eeeeee",
 		navBarHidden: true,
@@ -27,7 +27,7 @@
 		fullscreen : false,  
 	});
 	
-	var tab = Ti.UI.createTab({ window: win_base });
+	var tab = Ti.UI.createTab({ window: Ti.App.win_base });
 	tab_group.addTab(tab);
 	tab_group.open();
 	
@@ -50,14 +50,13 @@
 		width:"100%",
 		height:"80%",
 		// left:"20%",
-		width:Ti.UI.FILL,
-		height:Ti.UI.FILL,
 		views:dummyWindow,
+		horizontalBounce:false,
 		// showPagingControl: true,
         // pagingControlHeight: 30,
 	});
 	
-	win_base.add(Ti.App.scrollview);
+	Ti.App.win_base.add(Ti.App.scrollview);
 	
 	
 	//Button の　追加
@@ -77,6 +76,11 @@
 	var cameraButton = createImages("images/videocamera.png",153);
 	var searchButton = createImages("images/search.png",285);
 	
+	listButton.addEventListener('singletap',function(){
+		console.log("aaa");
+		require('UI/leftList').list();	
+	});
+	
 	//可視化用
 	var buttonBar = Ti.UI.createView({
 		width:"100%",
@@ -92,11 +96,6 @@
 	buttonBar.add(cameraButton);
 	buttonBar.add(searchButton);
 
-    // Butttonによる　画面遷移　未実装
-	Ti.App.createButton.addEventListener('singletap',function(e){
-		//
-	});
-    // 
 	var homebuttonBar = Ti.UI.createView({
 		width:"20%",
 		height:"100%",
@@ -105,6 +104,11 @@
 		image:"images/uniF489.png",
 		bubbleParent:false
 	});
+	
+	homebuttonBar.addEventListener('singletap',function(){
+		Ti.App.scrollview.scrollToView(0);
+	});
+	
 
 	// homebuttonBar.add(homeButton);
 
@@ -129,9 +133,10 @@
 	homebuttonBar.add(homeButton);
 	
 	homebuttonBar.addEventListener('singletap',function(e){
-		console.log("ok");
+		
 		//Ti.UI.ScrollableView. scrollToView(dummyWindow = [0]);
 	});
+	
 	
 	topLabel.addEventListener('singletap',function(e){
 	});
@@ -154,8 +159,8 @@
 	///////////////////////////////////////////////
 	
     // 	
-	win_base.add(buttonBar);
-	win_base.add(topLabel);
+	Ti.App.win_base.add(buttonBar);
+	Ti.App.win_base.add(topLabel);
 	// require('lib/camera').camera();
 	//これに入ったら各処理させる
 	Ti.App.addEventListener('loginComplete',function(){
