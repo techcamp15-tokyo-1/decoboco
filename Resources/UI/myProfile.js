@@ -33,7 +33,7 @@ exports.myProfile = function(json){
 				color:"#ffffff"
 			});
 
-			console.log(json);
+			// console.log(json);
 			
 			var profileImage = Ti.UI.createImageView({
 				Align:'center',
@@ -52,20 +52,20 @@ exports.myProfile = function(json){
 				color:"#000"
 			});
 			
-			var userIdLabel = Ti.UI.createLabel({
-				top:"1%",
-				text:"@"+json.data.username,
-				font: { fontSize: 12, fontFamily: 'AppleGothic', } ,
-				textAlign: 'center',
-				color:"#000"
-			});
+			// var userIdLabel = Ti.UI.createLabel({
+				// top:"1%",
+				// text:"@"+json.data.username,
+				// font: { fontSize: 12, fontFamily: 'AppleGothic', } ,
+				// textAlign: 'center',
+				// color:"#000"
+			// });
 			
 			var profileTextLabel = Ti.UI.createLabel({
 				top:"5%",
 				width:"60%",
 				height:Ti.UI.SIZE,
 				
-				text:"Twitter/Facebook/Mr.Chirdren/Mr.Babies/takumi/abcde/fghij/klmno/pqrst/uvwxy/z",
+				text:json.data.description,
 				// text:json.data.records.username;
 				font: { fontSize: 15, 
 						fontFamily: 'AppleGothic',
@@ -114,7 +114,7 @@ exports.myProfile = function(json){
 		
 		profView.add(profileImage);
 		profView.add(usernameLabel);
-		profView.add(userIdLabel);
+		// profView.add(userIdLabel);
 		profView.add(profileTextLabel);
 
 		
