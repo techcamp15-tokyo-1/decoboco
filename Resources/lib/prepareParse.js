@@ -32,5 +32,7 @@ exports.prepareParse = function(text){
 		}
 		else str += text[i];
 	}
+	// console.log(text);
+	// console.log(str);
 	return str;
 };
