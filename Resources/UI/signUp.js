@@ -21,7 +21,7 @@ exports.signUp = function(json){
 		width:"80%",
 		height:"80%",
 		layout:"vertical",
-		top:0,
+		top:"10%",
 		left:30,
 		opacity:1,
 		//backgroundColor:"#222"
@@ -48,6 +48,7 @@ exports.signUp = function(json){
 		},
 		textAlign:"center",
 		left:0,
+//		top:"10%"
 		top:"15%"
 	});
 	
@@ -70,7 +71,7 @@ exports.signUp = function(json){
 	// var Label2 = createHintLabel("Password", "5%");
 	
 	var signUpThumbnail = Ti.UI.createImageView({
-		top:0,
+		top:"3%",
 		left:85,
 		weight:"20%",
 		height:"20%",
@@ -79,8 +80,11 @@ exports.signUp = function(json){
 	});
 
 	signUpThumbnail.addEventListener('singletap',function(){
+		//image2.png
 //takePhoto
 //select image from gallary
+	console.log("image");
+
 
 	});
 
@@ -92,7 +96,7 @@ exports.signUp = function(json){
 	var createInputField = function(text,mask){
 		var userIdLabel = Ti.UI.createTextField({
 			color:"#111",
-		    top:"1%",
+		    top:"3%",
 		    left:25,
 		    width:"80%",
 		    height:"8%",
