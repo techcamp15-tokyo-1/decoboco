@@ -1,4 +1,4 @@
-exports.vineNewLogin = function(email,password,username){
+exports.vineSignUp = function(email,password,username){
 
 	var xhr = Ti.Network.createHTTPClient();
 	//login
@@ -18,14 +18,13 @@ exports.vineNewLogin = function(email,password,username){
 	xhr.onload = function(){
 		var str = require('lib/prepareParse').prepareParse(this.responseText);
 		// console.log(this.responseText);
-		
 		var json = JSON.parse(str);
 		
 	    if(json.error != "") alert('error');
 	    else{
-	    	console.log(json);
-	    	// Ti.App.key = json.data.key;
-	    	// Ti.App.username = json.data.username;
+	    	Ti.App.key = json.data.key;
+	    	Ti.App.username = json.data.username;
+	    	Ti.App.fireEvent('loginComplete');
 	    }
 	};
 };
@@ -52,8 +51,8 @@ exports.vineLogin = function(username,password){
 	    	// console.log(json);
 	    	Ti.App.key = json.data.key;
 	    	Ti.App.username = json.data.username;
+	    	Ti.App.fireEvent('loginComplete');
 	    }
-	    Ti.App.fireEvent('loginComplete');
 	};
 };
 
