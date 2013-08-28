@@ -30,8 +30,10 @@
 	tab_group.addTab(tab);
 	tab_group.open();
 	
+		// Ti.App.Properties.removeProperty('username');
+	    // Ti.App.Properties.removeProperty('password');
+	    
 	start();
-	
 	if(!Ti.App.Properties.hasProperty('username')){
 		var signSelectView = require('UI/signSelect').signSelect();	
 		Ti.App.win_base.add(signSelectView);
@@ -40,7 +42,7 @@
 	else{
 		// Ti.App.Properties.removeProperty('username');
 	    // Ti.App.Properties.removeProperty('password');
-		console.log(Ti.App.Properties.getString('username'));
+		// console.log(Ti.App.Properties.getString('username'));
 		require('lib/vineAPI').vineLogin(Ti.App.Properties.getString('username'),Ti.App.Properties.getString('password'));
 	}
 	
