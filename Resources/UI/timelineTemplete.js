@@ -1,39 +1,53 @@
 exports.tableTemplete = function(dataArray){
-		var tableview = Ti.UI.createTableView({
+	var tableview = Ti.UI.createTableView({
 		width:Ti.UI.FILL,
 		height:Ti.UI.FILL,	
 		selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
-		backgroundColor:"#ffffff"
+		backgroundColor:"#ffffff",
+		prependMovie:"none"
 	});
 
-	tableview.addEventListener('click',function(e){
+	tableview.addEventListener('singletap',function(e){
+		console.log('log  '+e.source.video);
 		if(e.source == '[object TiUIImageView]'){
+			if(tableview.prependMovie != "none"){
+				tableview.prependMovie.stop();
+				tableview.prependMovie = e.source.video;
+				console.log(e.source.video);
+				console.log(tableview.prependMovie);
+				console.log("-------------------------------------------------------");
+			}
+				
 			//すでに一回再生していた場合追加する必要性がないため存在の確認
 			if(e.source.video == undefined){
 				var video = Ti.Media.createVideoPlayer({
 				    backgroundColor : 'black',
 				    height : 300,
 				    width : 300,
-				    mediaControlStyle : Titanium.Media.VIDEO_CONTROL_DEFAULT,
+				    movieControlMode: Titanium.Media.VIDEO_CONTROL_HIDDEN,
 				    mediaControlStyle: Titanium.Media.VIDEO_CONTROL_NONE,
 				    scalingMode:Titanium.Media.VIDEO_SCALING_NONE,
 				    url : e.source.videoUrl,
-				    autoplay:true,
+				    autoplay:false,
 				    // borderColor:"#ff0000",
 				});
+				
 				var act = require('UI/actind').actind();
 				e.source.add(act);
 				act.show();
-				video.addEventListener('loadstate',function(){
-					e.source.remove(act);
+				video.addEventListener('mediatypesavailable',function(){
+					// e.source.remove(act);
 					act.hide();
 					// act = null;
 					video.play();
 					e.source.add(video);
+					tableview.prependMovie = video;
 				});
+				
 				e.source.video = video;	
+				
 			}
-			else{
+			else{				
 				var animation = Ti.UI.createAnimation({
 					opacity:1,
 					duration:1
@@ -43,14 +57,14 @@ exports.tableTemplete = function(dataArray){
 				e.source.video.animate(animation);
 				animation.addEventListener('complete',function(){
 					e.source.video.play();
+					console.log("---------------------else video start--------------");
 					animation = null;
-				});
-				e.source.video.addEventListener('loadstate',function(){
-					e.source.video.play();
 				});
 			}
 				
 			e.source.video.addEventListener('complete',function(){
+				e.source.video.stop();
+				console.log("----------------------video complete-----------------");
 				var animation2 = Ti.UI.createAnimation({
 					opacity:0,
 					duration:1
@@ -59,9 +73,9 @@ exports.tableTemplete = function(dataArray){
 				animation2 = null;
 			});
 			
-			e.source.video.addEventListener('playing',function(e){
-				console.log(e);
-			});
+			// e.source.video.addEventListener('playing',function(e){
+				// console.log(e);
+			// });
 		}
 	});
 
@@ -171,7 +185,7 @@ exports.tableTemplete = function(dataArray){
 				var commentLabel = Ti.UI.createLabel({
 					left:0,
 					top:0,
-					text:dataArray[i].description, //////////////////////////////////////////////////
+					text:dataArray[i].description, 
 					font: { fontSize: 17, fontFamily: 'AppleGothic', } ,
 					textAlign: 'left',
 					color:"#111"
@@ -187,21 +201,6 @@ exports.tableTemplete = function(dataArray){
 				layout:"horizontal"
 			});
 
-
-			// createImage = function(image,size){
-				// var button = Ti.UI.createButton({
-					// backgroundImage : image,
-					// left:size,
-					// width:45,
-				    // height:30,
-				// });
-				// return button;
-			// };
-// 			
-			// var likeButton = createImages("/images/thumbs_up.png",0);
-			// var commentButton = createImages("/images/comments.png",25);
-			// var shareButton = createImages("/images/shares.png",25);
-// 			
 			var likeButton = Ti.UI.createButton({
 				//title:"like",
 				backgroundImage : "/images/thumbs_up.png",
@@ -230,7 +229,7 @@ exports.tableTemplete = function(dataArray){
 
 			likeButton.addEventListener('singletap',function(e){
 				///// api.vimapp.com/posts/movie_id/likes
-				console.log(e);
+				// console.log(e);
 				require('lib/vineAPI').PostLike(e.source.postId);
 			});
 
