@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0
+apiversion: 2
+description: vine's camera
+author: hjAboutHiroppy
+license: Specify your license
+copyright: Copyright (c) 2013 by Your Company
+
+
+# these should not be edited
+name: vineCamera
+moduleid: com.hjAboutHiroppy.vineCamera
+guid: 6a141070-94fa-4653-aa14-052c01be268c
+platform: iphone
+minsdk: 3.1.1.GA
