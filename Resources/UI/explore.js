@@ -6,7 +6,6 @@ exports.explore = function(){
 		backgroundColor:"#ffffff"
 	});
 	
-<<<<<<< HEAD
 		var channelData = [
 					{
 				    title:"Comedy",
@@ -79,7 +78,6 @@ exports.explore = function(){
 					},
 		];
 
-=======
 var channelData = [
 			{
 		    title:"Comedy",
@@ -165,5 +163,4 @@ var channelData = [
 		    dest:""
 			},
 ];
->>>>>>> 1df317b98dd30967e77a4d65ef3b755050cee117
 };

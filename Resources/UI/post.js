@@ -10,7 +10,7 @@ exports.postWindow = function(){
 	
 	mainView.open();
 	
-	var vineCamera = require('com.HjAboutHiroppy.VineCamera');
+	// var vineCamera = require('com.HjAboutHiroppy.VineCamera');
 	console.log("---------------"+vineCamera+"------------------------");
 	var vineCameraView = vineCamera.createView({
 		width:"100%",

@@ -14,38 +14,53 @@ exports.tableTemplete = function(dataArray){
 				    backgroundColor : 'black',
 				    height : 300,
 				    width : 300,
-				    // mediaControlStyle : Titanium.Media.VIDEO_CONTROL_DEFAULT,
+				    mediaControlStyle : Titanium.Media.VIDEO_CONTROL_DEFAULT,
 				    mediaControlStyle: Titanium.Media.VIDEO_CONTROL_NONE,
 				    scalingMode:Titanium.Media.VIDEO_SCALING_NONE,
 				    url : e.source.videoUrl,
 				    autoplay:true,
 				    // borderColor:"#ff0000",
 				});
-				e.source.add(video);
-				video.play();
+				var act = require('UI/actind').actind();
+				e.source.add(act);
+				act.show();
+				video.addEventListener('loadstate',function(){
+					e.source.remove(act);
+					act.hide();
+					// act = null;
+					video.play();
+					e.source.add(video);
+				});
 				e.source.video = video;	
 			}
 			else{
 				var animation = Ti.UI.createAnimation({
 					opacity:1,
-					duration:150	
+					duration:1
 				});
-
+				
 				//opacityを１にする
 				e.source.video.animate(animation);
 				animation.addEventListener('complete',function(){
 					e.source.video.play();
 					animation = null;
 				});
-
+				e.source.video.addEventListener('loadstate',function(){
+					e.source.video.play();
+				});
 			}
+				
 			e.source.video.addEventListener('complete',function(){
 				var animation2 = Ti.UI.createAnimation({
 					opacity:0,
-					duration:150
+					duration:1
 				});
 				e.source.video.animate(animation2);
 				animation2 = null;
+			});
+			
+			e.source.video.addEventListener('playing',function(e){
+				console.log(e);
 			});
 		}
 	});

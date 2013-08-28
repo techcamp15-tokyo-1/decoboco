@@ -1,4 +1,10 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 provisioning_profiles/development/70240D9E-D938-45F5-9034-FF28FF765108/appid=com.decoboco.decobocoApp.*
 provisioning_profiles/development/70240D9E-D938-45F5-9034-FF28FF765108/name=Takumi
 provisioning_profiles/development/70240D9E-D938-45F5-9034-FF28FF765108/uuid=70240D9E-D938-45F5-9034-FF28FF765108
+=======
+provisioning_profiles/development/4DF4C8E5-68D3-4AC9-9DF7-4E747757CB77/appid=*
+provisioning_profiles/development/4DF4C8E5-68D3-4AC9-9DF7-4E747757CB77/name=iOS Team Provisioning Profile\: *
+provisioning_profiles/development/4DF4C8E5-68D3-4AC9-9DF7-4E747757CB77/uuid=4DF4C8E5-68D3-4AC9-9DF7-4E747757CB77
+>>>>>>> 5a2a8c7ca82052e3d9a4ad5f658232867f7013e1
