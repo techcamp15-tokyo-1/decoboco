@@ -17,7 +17,30 @@ exports.signUp = function(json){
 		backgroundImage:"/images/login_background.png"
 	});
 
-	var signUpArea = Ti.UI.createView({
+	var cancelButton = Ti.UI.createLabel({
+		top:0,
+		left:0,
+		color:"#ffffff",
+		backgroundColor:"#e74c3c",//red
+		width:40,
+		height:20,
+		text:"cancel",
+		font:{
+			//fontWeight:bold,
+			fontsize: 15,
+			//太さも 
+			fontFamily: 'AppleGothic',
+		},
+	});
+	
+	cancelButton.addEventListener('singletap',function(){
+		Ti.App.win_base.remove(signUpView);
+		signUpView = null;
+	});
+	
+	signUpView.add(cancelButton);
+	
+	var signUpArea = Ti.UI.createScrollView({
 		width:"60%",
 		height:"80%",
 		layout:"vertical",
