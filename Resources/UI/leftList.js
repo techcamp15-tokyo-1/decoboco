@@ -8,13 +8,47 @@ exports.list = function(){
 		zindex:100000000000000
 	});
 	
+	var channelLabel = Ti.UI.createLabel({
+		text:"CHANNEL",
+		textalign:"center",
+		width:Ti.UI.FILL,
+		height:50,
+		left:5
+	});
+	
+	leftView.add(channelLabel);
+	
 	var tableView = Ti.UI.createTableView({
+		top:50,
 		left:5,
 		width:Ti.UI.FILL,
 		height:Ti.UI.FILL,
 		backgroundColor:"transparent"
 	});
 	
+	//require('UI/explore').explore();
+	
+	// var data = [
+				// {
+				 // comedy:"Comedy",
+				 // art_Experimental:"Art & Experimental",
+				 // cats:"Cats",
+				 // dogs:"Dogs",
+				 // family:"Family",
+				 // beauty_fashion:"Beauty & Fashion",
+				 // health_fitness:"Health & Fitness",
+				 // nature:"Nature",
+				 // music:"Music",
+				 // news_politics:"News & Politics",
+				 // spcial_FX:"Special FX",
+				 // sports:"Sports",
+				 // Urban:"Urban",
+				 // wier_d:"wier d",
+				// }
+			// ];
+	
+	tableView.data = makeRow();
+
 	leftView.add(tableView);
 	var animation = Ti.UI.createAnimation({
 		left:0,
@@ -49,6 +83,24 @@ exports.list = function(){
 	
 	Ti.App.win_base.add(scrollView);
 	Ti.App.win_base.add(leftView);
+	
+	function makeRow(channelname){
+		var res = [];
+		for(var i=0;i< 15;i++){
+			var row = Ti.UI.createTableViewRow({
+				height:40,
+				width:Ti.UI.FILL
+			});
+			var label = Ti.UI.createLabel({
+				width:Ti.UI.FILL,
+				height:40,
+				text:channelname
+			});
+			row.add(label);
+			res.push(row);
+		}
+		return row;
+	}
 };
 
 
