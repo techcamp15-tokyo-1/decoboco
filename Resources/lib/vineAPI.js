@@ -7,7 +7,6 @@ exports.vineSignUp = function(email,password,username){
 	// xhr.open('POST','https://api.vineapp.com/users?authenticate=');
 	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.1.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
 	
-
 	xhr.send({
 		username:username,
 		password:password,
@@ -52,6 +51,8 @@ exports.vineLogin = function(username,password){
 	    	// console.log(json);
 	    	Ti.App.key = json.data.key;
 	    	Ti.App.username = json.data.username;
+	    	Ti.App.password = password;
+	    	Ti.App.email = username;
 	    	Ti.App.fireEvent('loginComplete');
 	    }
 	};
@@ -67,14 +68,15 @@ exports.vineGraphTimeLine = function(){
 	xhr.send();
 	
 	xhr.onload = function(){
-		
-		// var str = require('lib/prepareParse').prepareParse(this.responseText);
-		// var json = JSON.parse(str);
-		var json = JSON.parse(this.responseText);
+		// var json = JSON.parse(this.responseText);
+		// console.log(this.responseText);
+		var str = require('lib/regex').prepareParse(this.responseText);
+		console.log(str);
+		var json = JSON.parse(str);
 	    if(json.error != "") alert('error');
 	    else{
 	    	var data = require('lib/parseJson').parseJson(json);
-	    	console.log(require('UI/timelineTemplete').tableTemplete(data));
+	    	// console.log(require('UI/timelineTemplete').tableTemplete(data));
 	    	Ti.App.scrollview.views[0].add(require('UI/timelineTemplete').tableTemplete(data));
 	    }
 	};

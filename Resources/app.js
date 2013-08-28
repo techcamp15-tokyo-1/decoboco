@@ -32,11 +32,16 @@
 	
 	start();
 	
-	if(!Ti.App.Properties.hasProperty('accounts')){
-		// Ti.App.Properties.setList('accounts',[]);
+	if(!Ti.App.Properties.hasProperty('username')){
 		var signSelectView = require('UI/signSelect').signSelect();	
 		Ti.App.win_base.add(signSelectView);
 		Ti.App.win_base.loginSelectView = signSelectView;
+	}
+	else{
+		// Ti.App.Properties.removeProperty('username');
+	    // Ti.App.Properties.removeProperty('password');
+		console.log(Ti.App.Properties.getString('username'));
+		require('lib/vineAPI').vineLogin(Ti.App.Properties.getString('username'),Ti.App.Properties.getString('password'));
 	}
 	
 	function start(){
@@ -115,7 +120,7 @@
 		    height:"100%",
 		    top:0,
 		    left:0,
-		    image:"images/uniF489.png",
+		    image:"images/home2.png",
 		    bubbleParent:false
 	    });
 	    
@@ -179,6 +184,13 @@
 	    //これに入ったら各処理させる
 
 	    Ti.App.addEventListener('loginComplete',function(){
+	    	Ti.App.Properties.removeProperty('username');
+	    	Ti.App.Properties.removeProperty('password');
+	    	Ti.App.Properties.setString('username',Ti.App.email);
+	    	Ti.App.Properties.setString('password',Ti.App.password);
+	    	console.log(Ti.App.email);
+	    	
+	    	console.log(Ti.App.Properties.getString('username'));
 	    	if(Ti.App.win_base.loginSelectView != undefined){
 	    		// Ti.App.win_base.remove(Ti.App.win_base.loginSelectView);
 	    		var animation = Ti.UI.createAnimation({
@@ -218,8 +230,6 @@
 		    //require('lib/vineAPI').userData();
 		    //require('lib/vineAPI').vineLogin();
 		    
-		    require('UI/signSelect').signSelect();
-
 		    
 		    require('UI/myProfile').myProfile();
 		    require('lib/vineAPI').myProfile();
