@@ -16,52 +16,40 @@ exports.signUp = function(json){
 		color:"#ffffff",
 		backgroundImage:"/images/login_background.png"
 	});
-
-	var cancelButton = Ti.UI.createLabel({
-		top:0,
-		left:0,
-		color:"#ffffff",
-		backgroundColor:"#e74c3c",//red
-		width:40,
-		height:20,
-		text:"cancel",
-		font:{
-			//fontWeight:bold,
-			fontsize: 15,
-			//太さも 
-			fontFamily: 'AppleGothic',
-		},
-	});
-	
-	cancelButton.addEventListener('singletap',function(){
-		Ti.App.win_base.remove(signUpView);
-		signUpView = null;
-	});
-	
-	signUpView.add(cancelButton);
 	
 	var signUpArea = Ti.UI.createScrollView({
-		width:"60%",
+		width:"80%",
 		height:"80%",
 		layout:"vertical",
 		top:"10%",
-		left:"60px",
-		opacity:0.9,
-		backgroundColor:"#00ff00"
+		left:30,
+		opacity:1,
+		//backgroundColor:"#222"
 	});
+// 	
+		// width:"60%",
+		// height:"60%",
+		// layout:"vertical",
+		// top:"20%",
+		// left:60,
+		// opacity:0.7,
+		// backgroundcColor:"#000"
+// 	
 	
 	var topLabel = Ti.UI.createLabel({
-		width:"60%",
+		width:Ti.UI.FILL,
 		height:"15%",
 		text:"Sign Up", 
+		color:"#ffffff",
 		font:{
-			fontsize: 15,
-			//太さも 
+			fontSize: 30,
+			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
 		textAlign:"center",
-		left:10,
-		top:"3%"
+		left:0,
+//		top:"10%"
+		top:"15%"
 	});
 	
 	
@@ -83,57 +71,98 @@ exports.signUp = function(json){
 	// var Label2 = createHintLabel("Password", "5%");
 	
 	var signUpThumbnail = Ti.UI.createImageView({
-		top:"2%",
-		left:"40%",
+		top:"3%",
+		left:85,
 		weight:"20%",
 		height:"20%",
 		image:"/images/image.png",
 		
 	});
-	signUpArea.add(signUpThumbnail);
 
-	var createInputField = function(text){
+	signUpThumbnail.addEventListener('singletap',function(){
+		//image2.png
+//takePhoto
+//select image from gallary
+	console.log("image");
+
+
+	});
+
+
+	signUpArea.add(signUpThumbnail);
+	
+	
+
+	var createInputField = function(text,mask){
 		var userIdLabel = Ti.UI.createTextField({
 			color:"#111",
-		    top:"5%",
-		    left:10,
+		    top:"3%",
+		    left:25,
 		    width:"80%",
-		    height:"10%",
+		    height:"8%",
 		    hintText:text,
+		    passwordMask:mask,
+		    autocapitalization:false,
 		    font:{
-				fontsize: 13,
+				fontSize: 13,
 				fontFamily: 'AppleGothic',
 			},
 		    keyboardType:Ti.UI.KEYBOARD_DEFAULT,
-		    returnKeyType:Ti.UI.RETURNKEY_DEFAULT,
+		    returnKeyType:Ti.UI.RETURNKEY_SEND,
 		    borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		});
 		return userIdLabel;
 	};
-	
-	var userNameLabel = createInputField(' your name ');
-	var userIdLabel = createInputField(' E-mail  sample@sample.co.jp ');
-	var passwordLabel = createInputField(' password ');
+
+	var userNameLabel = createInputField(' your name ', false);
+	var userIdLabel = createInputField(' E-mail  sample@sample.co.jp ', false);
+	var passwordLabel = createInputField(' password ', true);
 	signUpArea.add(userNameLabel);
 	signUpArea.add(userIdLabel);
 	signUpArea.add(passwordLabel);
 
 	var signUpButton = Ti.UI.createLabel({
-		top:"5%",
-		left:"2%",
+		top:0,
+		left:10,
 		color:"#ffffff",
 		backgroundColor:"#2ecc71",//green
-		width:"80%",
-		height:"15%",
-		label:"Sign Up",
+		width:"45%",
+		height:"40%",
+		text:"Sign Up",
+		textAlign:"center",
 		font:{
-			//fontWeight:bold,
-			fontsizefontSize: 13,
-			//太さも 
+			fontSize: 20,
+			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
 		borderRadius:"0.5"
 	});
+	
+	
+	
+	var cancelButton = Ti.UI.createLabel({
+		top:0,
+		left:5,
+		color:"#ffffff",
+		backgroundColor:"#3498db",//blue
+		width:"45%",
+		height:"40%",
+		text:"cancel",
+		textAlign:"center",
+		font:{
+			fontSize: 20,
+			fontWeight:"bold",
+			fontFamily: 'AppleGothic',
+		},
+		borderRadius:"0.8"
+	});
+	
+	cancelButton.addEventListener('singletap',function(){
+		Ti.App.win_base.remove(signUpView);
+		signUpView = null;
+	});
+	
+
 	
 	signUpButton.addEventListener('singletap',function(){
 		if(userNameLabel.value != "" && userIdLabel.value != "" && passwordLabel.value != ""){
@@ -157,9 +186,18 @@ exports.signUp = function(json){
 	// borderRadius:"0.3"
 	// });
 	
-	signUpArea.add(signUpButton);
+	var buttonView = Ti.UI.createView({
+		layout:'horizontal',
+		top:40,
+		width:Ti.UI.FILL,
+		height:"30%",
+	});
+	
+	
+	buttonView.add(signUpButton);
+	buttonView.add(cancelButton);
 	//loginArea.add(twitterLoginButton);
-
+	signUpArea.add(buttonView);
 	signUpView.add(signUpArea);	
 	
 	return signUpView;

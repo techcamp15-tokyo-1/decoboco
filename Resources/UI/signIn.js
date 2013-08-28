@@ -18,27 +18,28 @@ exports.signIn = function(){
 		backgroundImage:"/images/login_background.png",
 	});
 	
-	var signInArea = Ti.UI.createView({
-		width:"60%",
-		height:"60%",
+	var signInArea = Ti.UI.createScrollView({
+		width:"70%",
+		height:"80%",
 		layout:"vertical",
-		top:"20%",
+		top:"10%",
 		left:60,
-		opacity:0.7,
-		color:"#ffffff"
+		opacity:0.9,
+		backgroundcColor:"#222"
 	});
 	
 	var topLabel = Ti.UI.createLabel({
 		width:Ti.UI.FILL,
 		height:"15%",
+		color:"#ffffff",
 		text:"Sign In", 
 		font:{
-			fontsize: 13,
-			//太さも 
+			fontSize: 30,
+			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
 		textAlign:"center",
-		left:10,
+		left:-25,
 		top:"3%"
 	});
 	
@@ -60,23 +61,29 @@ exports.signIn = function(){
 	// var Label2 = createHintLabel("Password", "5%");
 	
 
-	createInputField = function(text){
+	createInputField = function(text,musk){
 		var userIdLabel = Ti.UI.createTextField({
 			color:'#111',
 		    top:"3%",
 		    left:10,
 		    width:"80%",
 		    height:"10%",
+		    passwordMask:musk,
+		    autocapitalization:false,
+		    font:{
+				fontSize: 13,
+				fontFamily: 'AppleGothic',
+			},
 		    hintText:text,
+		    returnKeyType:Titanium.UI.RETURNKEY_SEND,
 		    keyboardType:Titanium.UI.KEYBOARD_DEFAULT,
-		    returnKeyType:Titanium.UI.RETURNKEY_DEFAULT,
 		    borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
 		});
 		return userIdLabel;
 	};
 	
-	var userIdLabel = createInputField(' sample@sample.co.jp ');
-	var passwordLabel = createInputField(' password ');
+	var userIdLabel = createInputField(' sample@sample.co.jp ', false);
+	var passwordLabel = createInputField(' password ', true);
 	
 	// userIdLabel.addEventListener('blur',function(){
 		// console.log(userIdLabel.value);
@@ -91,20 +98,20 @@ exports.signIn = function(){
 	signInArea.add(passwordLabel);
 	
 	var signInButton = Ti.UI.createLabel({
-		top:"5%",
-		left:20,
+		top:0,
+		left:5,
 		color:"#ffffff",
 		backgroundColor:"#e74c3c",//red
-		width:"39%",
-		height:"32%",
+		width:"45%",
+		height:"40%",
 		text:"Sign In",
+		textAlign:"center",
 		font:{
-			//fontWeight:bold,
-			fontsize: 30,
-			//太さも 
+			fontSize: 20,
+			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
-		// borderRadius:"0.8"
+		borderRadius:"0.8"
 	});
 
 	signInButton.addEventListener('singletap',function(){
@@ -113,20 +120,22 @@ exports.signIn = function(){
 			console.log('ininini');
 		}
 	});
+	
 	var cancelButton = Ti.UI.createLabel({
 		top:0,
-		left:0,
+		left:5,
 		color:"#ffffff",
-		backgroundColor:"#e74c3c",//red
-		width:40,
-		height:20,
+		backgroundColor:"#3498db",//blue
+		width:"45%",
+		height:"40%",
 		text:"cancel",
+		textAlign:"center",
 		font:{
-			//fontWeight:bold,
-			fontsize: 30,
-			//太さも 
+			fontSize: 20,
+			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
+		borderRadius:"0.8"
 	});
 	
 	cancelButton.addEventListener('singletap',function(){
@@ -150,9 +159,19 @@ exports.signIn = function(){
 	// borderRadius:"0.3"
 	// });
 	
-	signInArea.add(signInButton);
-	signInArea.add(cancelButton);
+	var buttonView = Ti.UI.createView({
+		layout:'horizontal',
+		top:50,
+		left:-10,
+		width:Ti.UI.FILL,
+		height:"30%",
+	});
+	
+	
+	buttonView.add(signInButton);
+	buttonView.add(cancelButton);
 	//loginArea.add(twitterLoginButton);
+	signInArea.add(buttonView);
 
 	signInView.add(signInArea);	
 	
