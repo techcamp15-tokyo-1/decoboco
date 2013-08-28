@@ -22,7 +22,7 @@ exports.vineSignUp = function(email,password,username){
 	    if(json.error != "") alert('error');
 	    else{
 	    	
-	    	Ti.App.key = json.data.key;
+			Ti.App.key = json.data.key;
 	    	Ti.App.username = json.data.username;
 	    	Ti.App.fireEvent('loginComplete');
 	    }
