@@ -69,7 +69,7 @@ exports.vineGraphTimeLine = function(){
 	
 	xhr.onload = function(){
 		// var json = JSON.parse(this.responseText);
-		// console.log(this.responseText);
+		console.log(this.responseText);
 		var str = require('lib/regex').prepareParse(this.responseText);
 		console.log(str);
 		var json = JSON.parse(str);
@@ -118,7 +118,7 @@ exports.myProfile = function(){
 	xhr.send();
 	
 	xhr.onload = function(){
-		var str = require('lib/prepareParse').prepareParse(this.responseText);
+		var str = require('lib/regex').prepareParse(this.responseText);
 		var json = JSON.parse(str);
 	    if(json.error != "") alert('error');
 	    else{
