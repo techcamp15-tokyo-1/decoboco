@@ -6,6 +6,80 @@ exports.explore = function(){
 		backgroundColor:"#ffffff"
 	});
 	
+<<<<<<< HEAD
+		var channelData = [
+					{
+				    title:"Comedy",
+				    hasChild:true,
+					},
+					
+					{
+				    title:"Art & Experimental",
+				    hasChild:true,
+					},
+					
+					{
+				    title:"Cats",
+				    hasChild:true,		    
+					},
+					
+					{
+				    title:"Dogs",
+				    hasChild:true,		    
+					},
+					
+					{
+				    title:"Family",
+				    hasChild:true,		    
+					},
+					
+					{
+				    title:"Beauty & Fashion",
+				    hasChild:true,		    
+					},
+					
+					{
+				    title:"Health & Fitness",
+				    hasChild:true,		    
+					},
+					
+					{
+				    title:"Nature",
+				    hasChild:true,		    
+					},
+					
+					{
+					title:"Music",
+				    hasChild:true,		    
+					},
+					
+					{
+				    title:"News & Politics",
+				    hasChild:true,		    
+					},
+					
+					{
+				    title:"Special FX",
+				    hasChild:true,    
+					},
+					
+					{
+				    title:"Sports",
+				    hasChild:true,  
+					},
+					
+					{
+				    title:"Urban",
+				    hasChild:true,		    
+					},
+					
+					{
+				    title:"wier d",
+				    hasChild:true,
+					},
+		];
+
+=======
 var channelData = [
 			{
 		    title:"Comedy",
@@ -91,4 +165,5 @@ var channelData = [
 		    dest:""
 			},
 ];
+>>>>>>> 1df317b98dd30967e77a4d65ef3b755050cee117
 };

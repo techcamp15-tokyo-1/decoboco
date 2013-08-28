@@ -10,10 +10,13 @@
 	// var v = b.createView();
 	// console.log(v);
 	
-	require('lib/vineAPI').vineLogin('dreams.come.true.about@gmail.com','about19920429');
+	
+	var a = require('UI/signSelect').signSelect();
+	//require('lib/vineAPI').vineLogin('dreams.come.true.about@gmail.com','about19920429');
 	// require('lib/vineAPI').vineLogin('e.takumi.89@gmail.com','8Gatu9Ka');
-	
-	
+	console.log("=================");
+	console.log(a);
+	console.log("=================");
 	Ti.App.disableNetworkActivityIndicator = true; //ネットワークインジゲータを消す
 	
 	tab_group = Ti.UI.createTabGroup();
@@ -26,6 +29,8 @@
 		tabBarHidden: true,
 		fullscreen : false,  
 	});
+	
+	Ti.App.win_base.add(a);
 	
 	var tab = Ti.UI.createTab({ window: Ti.App.win_base });
 	tab_group.addTab(tab);
@@ -58,6 +63,7 @@
 	});
 	
 	Ti.App.win_base.add(Ti.App.scrollview);
+	
 	
 	
 	//Button の　追加
@@ -167,6 +173,7 @@
 	Ti.App.win_base.add(topLabel);
 	// require('lib/camera').camera();
 	//これに入ったら各処理させる
+
 	Ti.App.addEventListener('loginComplete',function(){
 		console.log('login');
 		
@@ -175,11 +182,28 @@
 		// Ti.App.scrollview.views[0].add(require('UI/myTimeline').myTimeline());
 		//test
 		//require('UI/newLogin').newLogin();
+<<<<<<< HEAD
+
+
+		// require('UI/signIn').signIn();
+		// require('UI/myProfile').myProfile();
+		// require('lib/vineAPI').myProfile();	
+		// require('lib/vineAPI').vineGraphTimeLine();
+
+
+		//require('lib/vineAPI').userData();
+		//require('lib/vineAPI').vineLogin();
+		
+		require('UI/signSelect').signSelect();
+
+		
+=======
 		require('UI/myProfile').myProfile();
 		require('lib/vineAPI').myProfile();
 		
 		require('lib/vineAPI').vineGraphTimeLine();
 		//require('lib/vineAPI').userData();		
+>>>>>>> 1df317b98dd30967e77a4d65ef3b755050cee117
 	});
 	
 })();
