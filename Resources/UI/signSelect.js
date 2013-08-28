@@ -8,7 +8,7 @@ exports.signSelect = function(){
 			layout:"vertical",
 			top:0,
 			color:"#ffffff",
-			image:"../images/login_background.png"
+			backgroundImage:"/images/login_background.png"
 		});
 		signSelectView.hide();
 		
