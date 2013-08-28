@@ -39,8 +39,8 @@ exports.myProfile = function(json){
 				Align:'center',
 				top:"3%",
 				borderColor:"#345600",
-				width:90,
-				height:90,
+				width:150,
+				height:150,
 				image:json.data.avatarUrl
 			});
 			
