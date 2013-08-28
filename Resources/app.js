@@ -5,7 +5,7 @@
 	
 	///////////
 	// require('lib/vineAPI').vineNewLogin('e.takumi.89@gmail.com','techcamptech','TechcampTakumi');
-	//require('lib/vineAPI').vineNewLogin('higezizii-tansoku-choko-about@about-hiroppy.com','about19920429','about_hiroppy_test');
+	require('lib/vineAPI').vineNewLogin('higezizii-tansoku-choko-about@about-hiroppy.com','about19920429','about_hiroppy_test');
 	// var b = require('com.HjAboutHiroppy.VineCamera');
 	// var v = b.createView();
 	// console.log(v);
@@ -57,6 +57,7 @@
 		// left:"20%",
 		views:dummyWindow,
 		horizontalBounce:false,
+		cacheSize:6,
 		// showPagingControl: true,
         // pagingControlHeight: 30,
 	});
@@ -83,8 +84,11 @@
 	var searchButton = createImages("images/search.png",285);
 	
 	listButton.addEventListener('singletap',function(){
-		console.log("aaa");
 		require('UI/leftList').list();	
+	});
+	
+	cameraButton.addEventListener('singletap',function(){
+		require('UI/post').postWindow();
 	});
 	
 	//可視化用
@@ -178,6 +182,7 @@
 		// Ti.App.scrollview.views[0].add(require('UI/myTimeline').myTimeline());
 		//test
 		//require('UI/newLogin').newLogin();
+<<<<<<< HEAD
 
 
 		// require('UI/signIn').signIn();
@@ -192,6 +197,13 @@
 		require('UI/signSelect').signSelect();
 
 		
+=======
+		require('UI/myProfile').myProfile();
+		require('lib/vineAPI').myProfile();
+		
+		require('lib/vineAPI').vineGraphTimeLine();
+		//require('lib/vineAPI').userData();		
+>>>>>>> 1df317b98dd30967e77a4d65ef3b755050cee117
 	});
 	
 })();
