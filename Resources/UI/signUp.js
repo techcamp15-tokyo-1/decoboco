@@ -185,7 +185,7 @@ exports.signUp = function(json){
 			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
-		borderRadius:"0.5",
+		//borderRadius:"0.5",
 		
 	});
 	
@@ -205,7 +205,7 @@ exports.signUp = function(json){
 			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
-		borderRadius:"0.8"
+		//borderRadius:"0.8"
 	});
 	
 	cancelButton.addEventListener('singletap',function(){
