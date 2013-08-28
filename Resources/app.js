@@ -19,7 +19,7 @@
 	//一番下のベースLayer
 	Ti.App.win_base = Ti.UI.createWindow({
 		// backgroundImage: 'image/background.jpg',
-		backgroundColor:"#eeeeee",
+		backgroundColor:"#DED7CF",
 		navBarHidden: true,
 		tabBarHidden: true,
 		fullscreen : false,  
@@ -54,7 +54,7 @@
 		    var w = Ti.UI.createWindow({
 			    width:"100%",
 			    height:Ti.UI.FILL,
-			    backgroundColor:"#ddd",
+			    backgroundColor:"#E8E5C8",
 		    });
 		    dummyWindow.push(w);	
 	    }
@@ -89,7 +89,7 @@
 		    return button;
 	    };
 	    
-	    var homeButton = createImages("images/uniF489_.png",17);
+	    var homeButton = createImages("images/home2.png",17);
 	    var listButton = createImages("images/list.png",17);
 	    var cameraButton = createImages("images/videocamera.png",153);
 	    var searchButton = createImages("images/search.png",285);
