@@ -13,22 +13,22 @@ exports.signSelect = function(){
 		signSelectView.hide();
 		
 		var signSelectArea = Ti.UI.createView({
-			width:"60%",
-			height:"60%",
+			width:"70%",
+			height:"70%",
 			layout:"vertical",
-			top:"20%",
-			left:"60px",
+			top:"15%",
+			left:45,
 			opacity:0.7,
-			color:"#ffffff"
+			backgroundColor:"#ffffff"
 		});
 		
 		var topLabel = Ti.UI.createLabel({
 			width:Ti.UI.FILL,
-			height:"15%",
-			text:"please choose Sign in or Sign up.", 
+			height:"30%",
+			text:"Please select \n Sign in or Sign up.", 
 			font:{
-				fontsizefontSize: 13,
-				//太さも 
+				fontSize: 22,
+				fontWeight:"bold",
 				fontFamily: 'AppleGothic',
 			},
 			textAlign:"center",
@@ -40,36 +40,38 @@ exports.signSelect = function(){
 		
 		var signInButton = Ti.UI.createLabel({
 			top:"5%",
-			left:"20px",
+			left:5,
 			color:"#ffffff",
 			backgroundColor:"#e74c3c",//red
-			width:Ti.UI.FILL,
-			height:"20%",
+			width:"60%",
+			height:"40%",
 			text:"Sign In",
+			textAlign:"center",
 			font:{
 				//fontWeight:bold,
-				fontsize: 13,
-				//太さも 
+				fontSize: 20,
+				fontWeight:"bold",
 				fontFamily: 'AppleGothic',
 			},
-			// borderRadius:"0.8"
+			borderRadius:"0.8"
 		});
 
 		var signUpButton = Ti.UI.createLabel({
-			top:"5%",
-			left:"2%",
+			top:10,
+			left:5,
 			color:"#ffffff",
 			backgroundColor:"#2ecc71",//green
-			width:Ti.UI.FILL,
-			height:"20%",
+			width:"60%",
+			height:"40%",
 			text:"Sign Up",
+			textAlign:"center",
 			font:{
 				//fontWeight:bold,
-				fontsize: 13,
-				//太さも 
+				fontSize: 20,
+				fontWeight:"bold",
 				fontFamily: 'AppleGothic',
 			},
-			// borderRadius:"0.5"
+			borderRadius:"0.5"
 		});
 	
 	
@@ -86,9 +88,20 @@ exports.signSelect = function(){
 			// console.log("move to SignUp page");
 		});
 		
+		var buttonView = Ti.UI.createView({
+			layout:'vertical',
+			top:30,
+			left:60,
+			width:Ti.UI.FILL,
+			height:"30%",
+		});
 	
-		signSelectArea.add(signInButton);
-		signSelectArea.add(signUpButton);
+	
+		buttonView.add(signInButton);
+		buttonView.add(signUpButton);
+
+		signSelectArea.add(buttonView);
+
 
 		signSelectView.add(signSelectArea);	
 		signSelectView.show();
