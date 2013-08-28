@@ -111,7 +111,7 @@ exports.signIn = function(){
 			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
-		borderRadius:"0.8"
+		//borderRadius:"0.8"
 	});
 
 	signInButton.addEventListener('singletap',function(){
@@ -135,7 +135,7 @@ exports.signIn = function(){
 			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
-		borderRadius:"0.8"
+		//borderRadius:"0.8"
 	});
 	
 	cancelButton.addEventListener('singletap',function(){
