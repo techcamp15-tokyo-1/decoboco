@@ -5,7 +5,7 @@
 	
 	///////////
 	// require('lib/vineAPI').vineNewLogin('e.takumi.89@gmail.com','techcamptech','TechcampTakumi');
-	require('lib/vineAPI').vineNewLogin('higezizii-tansoku-choko-about@about-hiroppy.com','about19920429','about_hiroppy_test');
+	// require('lib/vineAPI').vineNewLogin('higezizii-tansoku-choko-about@about-hiroppy.com','about19920429','about_hiroppy_test');
 	// var b = require('com.HjAboutHiroppy.VineCamera');
 	// var v = b.createView();
 	// console.log(v);
