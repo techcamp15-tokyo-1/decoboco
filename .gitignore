@@ -4,3 +4,4 @@ tmp
 ._*
 .DS_Store
 README
+.settings/com.appcelerator.titanium.core.prefs
