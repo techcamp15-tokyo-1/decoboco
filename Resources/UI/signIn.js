@@ -75,7 +75,7 @@ exports.signIn = function(){
 				fontFamily: 'AppleGothic',
 			},
 		    hintText:text,
-		    returnKeyType:Titanium.UI.RETURNKEY_SEND,
+		    returnKeyType:Titanium.UI.RETURNKEY_OK,
 		    keyboardType:Titanium.UI.KEYBOARD_DEFAULT,
 		    borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
 		});
