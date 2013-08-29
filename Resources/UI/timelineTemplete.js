@@ -57,6 +57,7 @@ exports.tableTemplete = function(dataArray){
 				e.source.video.animate(animation);
 				animation.addEventListener('complete',function(){
 					e.source.video.play();
+					console.log(e.source.video);
 					console.log("---------------------else video start--------------");
 					animation = null;
 				});
