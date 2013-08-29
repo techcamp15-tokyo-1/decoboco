@@ -10,14 +10,14 @@ exports.list = function(){
 		left:-300,
 		height:Ti.UI.FILL,
 		width:200,
-		backgroundColor:"#7A7B7D",
+		backgroundColor:"#2c3e50",//#2c3e50,#7A7B7D
 		opacity:0.97,
 		zindex:100000000000000
 	});
 	
 	var channelLabel = Ti.UI.createLabel({
 		text:"CHANNEL",
-		color:"#ffffff",
+		color:"#d3c1af",
 		textalign:"center",
 		font:{
 			fontSize:30,
@@ -97,6 +97,13 @@ exports.list = function(){
 				},
 				text:" "+channelname[i],
 			});
+			row.addEventListener('singletap',function(e){
+
+
+			require('UI/explore').explore();
+
+			});
+
 			row.add(label);
 			res.push(row);
 			//console.log(label);
