@@ -16,7 +16,7 @@ exports.myProfile = function(json){
 	    else{
 	    	console.log("------line23------------ myprofile----------");
 	    	//Ti.App.fireEvent('GetProfileComplete');
-	    	//console.log(json);
+	    	console.log(json);
 	    	// console.log(json.data.records[0].videoUrl)
 	    	var v = createView(json);								////////////////////////////
 	    	Ti.App.scrollview.views[3].add(v);
@@ -35,15 +35,132 @@ exports.myProfile = function(json){
 
 			// console.log(json);
 			
+			var thumbView = Ti.UI.createView({
+				width:125,
+				height:125,
+				top:"5%",
+				Align:'center',
+				backgroundColor:"#ffffff",
+				borderRadius:5
+			});
+			
 			var profileImage = Ti.UI.createImageView({
 				Align:'center',
-				top:"5%",
+				top:"6%",
 				borderColor:"#DED7CF",
-				width:130,
-				height:130,
+				width:110,
+				height:110,
 				image:json.data.avatarUrl,
 				//borderRadius: 8
 			});
+			
+			thumbView.add(profileImage);
+			
+	///////////  setting ////////////////////////////////////
+	
+			var settingButton = Ti.UI.createImageView({
+				width:20,
+				height:20,
+				backgroundColor:"#F5F1E9",
+				image:"images/cog.png",
+				left:"90%",
+				top:10
+			});
+
+			var underSetView = Ti.UI.createView({
+				width:Ti.UI.FILL,
+				height:"100%",
+				//backgroundColor:"#000000",
+				opacity:0,
+			});
+			
+			var setView = Ti.UI.createView({
+				width:"40%",
+				height:"60%",
+				top:80,
+				left:100,
+				layout:"vertical",
+				backgroundColor:"#666666",
+				opacity:0.8
+				
+				//bubbleParent:true,
+				//false
+				//zindex:100000000000000
+			});
+							
+			var setButton = function(top,title){
+				var setButton = Ti.UI.createLabel({
+					textAlign:"center",
+					top:top,
+					left:10,
+					text:title,
+					textAlign:"center",
+					widht:300,
+					height:"25%",
+					backgroundColor:"#222222",
+					opacity:1,
+					//bubbleParent:false
+				});
+				return setButton;
+			};
+			
+			var fixButton = setButton("6%","setting");
+			var logoutButton = setButton("5%","logout");
+			var cancelButton = setButton("5%","cancel");
+			
+			
+			profView.add(settingButton);
+			setView.add(fixButton);
+			setView.add(logoutButton);
+			setView.add(cancelButton);
+			underSetView.add(setView);
+			
+			var animation = Ti.UI.createAnimation({
+				opacity:0.8,
+				duration:250
+				});
+				Ti.App.scrollview.views[Ti.App.scrollview.currentPage].add(underSetView);
+				underSetView.animate(animation);
+				animation = null;
+		
+
+			settingButton.addEventListener('singletap',function(){
+				
+				
+						
+				var animation = Ti.UI.createAnimation({
+					opacity:0.8,
+					duration:250
+				});
+				Ti.App.scrollview.views[Ti.App.scrollview.currentPage].add(underSetView);
+				underSetView.animate(animation);
+				animation = null;
+				
+				});
+				
+			
+			logoutButton.addEventListener('singletap',function(){
+				
+			});
+			
+			
+			
+			cancelButton.addEventListener('singletap',function(){
+				underSetView.hide();
+			});
+			
+
+// 
+			// setView.add(logoutButton);
+			// // setView.add(cancelButton);
+			// underSetView.add(setView);
+// 			
+			//profView.add(underSetView);
+			
+			
+			
+			
+			
 			
 			var usernameLabel = Ti.UI.createLabel({
 				top:"3%",
@@ -54,13 +171,6 @@ exports.myProfile = function(json){
 				color:"#2c3e50"
 			});
 			
-			// var userIdLabel = Ti.UI.createLabel({
-				// top:"1%",
-				// text:"@"+json.data.username,
-				// font: { fontSize: 12, fontFamily: 'AppleGothic', } ,
-				// textAlign: 'center',
-				// color:"#000"
-			// });
 			
 			var profileTextLabel = Ti.UI.createLabel({
 				top:"1%",
@@ -78,48 +188,72 @@ exports.myProfile = function(json){
 			});
 			
 			var buttonView = Ti.UI.createView({
-				width:Ti.UI.FILL,
+				width:Ti.UI.SIZE,
 				top:"5%",
 				height:35,
-				left:"21%",
+				center:0,
+				left:40,
 				// top:,
 				// bottom:,
-				layout:"horizontal"
+				layout:"horizontal",
+				
 			});
+		
+		///////////	
 			
-			createLabel = function(text,left){
+			createLabel = function(num,text,left){
 				var button = Ti.UI.createLabel({
 					// color : "#0c7ced",
-					color :"#ffffff",
+					color :"#f5e4cd",
 					backgroundColor:"#34495e",//#f39c12, #93B8CA, #FDC44F, #34495e, #2c3e50
 					//borderColor:"",
 					font: { fontSize: 14, 
 							fontWeight:'bold',
 							fontFamily: 'AppleGothic', 
 							} ,
-					text:text,
+					text:num+"・"+text,
+					//text:text,
 					top:-2,
 					textAlign:'center',
 					left:left,
-					width:"35%",
+					width:"45%",
 				    height:40,
 				    //borderRadius: 10
 				});
 				return button;
 			};
 
-		var followersButton = createLabel("FOLLOWERS",0);
-		var followingButton = createLabel("FOLLOWING","3%");
+//第一引数にforrower, forrows数
+			//console.log("========");
+			//console.log(json.data);
+
+			var fsNum = json.data.followerCount;
+		 	var fgNum = json.data.followingCount; 
+		
+			var followersButton = createLabel(fsNum,"FOLLOWERS",0);
+			var followingButton = createLabel(fgNum,"FOLLOWING","3%");
+
+		// var followersButton = createLabel(fsNum,"FOLLOWERS",0);
+		// var followingButton = createLabel(fgNum,"FOLLOWING","3%");
 				
 			followersButton.addEventListener('singletap',function(){
-				console.log("Followers");
+				console.log(json.data.followerCount);
 			});
 			
 			followingButton.addEventListener('singletap',function(){
-				console.log("Following");
+				console.log(json.data.followingCount);
 			});			
 		
-		profView.add(profileImage);
+		//profView.add(settingButton);
+		
+		//profView.add(setView);
+			
+		// settingButton.addEventListener('singletap',function(){
+			// setView.show();
+		// });
+			
+			
+		profView.add(thumbView);
 		profView.add(usernameLabel);
 		// profView.add(userIdLabel);
 		profView.add(profileTextLabel);
