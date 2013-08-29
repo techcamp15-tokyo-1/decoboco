@@ -26,4 +26,4 @@ exports.camera = function(){
 	    videoMaximumDuration:10000,
 	    videoQuality:Titanium.Media.QUALITY_HIGH
 	});
-}
+};
