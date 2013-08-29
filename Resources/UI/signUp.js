@@ -140,8 +140,6 @@ exports.signUp = function(json){
 
 
 	signUpArea.add(signUpThumbnail);
-	
-	
 
 	var createInputField = function(text,mask){
 		var userIdLabel = Ti.UI.createTextField({
