@@ -12,7 +12,7 @@ exports.list = function(){
 		width:200,
 		backgroundColor:"#2c3e50",//#2c3e50,#7A7B7D
 		opacity:0.97,
-		zindex:100000000000000
+		
 	});
 	
 	var channelLabel = Ti.UI.createLabel({
