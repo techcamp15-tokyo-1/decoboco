@@ -82,6 +82,35 @@ exports.vineGraphTimeLine = function(){
 	};
 };
 
+
+exports.vineExploreTimeLine = function(channelId){
+	var xhr = Ti.Network.createHTTPClient();
+	xhr.open('GET','https://api.vineapp.com/timelines/channels/'+channelId+'/recent');
+	
+	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
+	xhr.setRequestHeader('vine-session-id',Ti.App.key);
+	
+	xhr.send();
+	
+	xhr.onload = function(){
+		// var json = JSON.parse(this.responseText);
+		console.log(this.responseText);
+		var str = require('lib/regex').prepareParse(this.responseText);
+		console.log(str);
+		var json = JSON.parse(str);
+	    if(json.error != "") alert('error');
+	    else{
+	    	var data = require('lib/parseJson').parseJson(json);
+	    	// console.log(require('UI/timelineTemplete').tableTemplete(data));
+	    	Ti.App.scrollview.views[0].add(require('UI/explore').tableTemplete(data));
+	    }
+	};
+};
+
+
+
+
+
 exports.vinePopularTimeLine = function(){
 	var xhr = Ti.Network.createHTTPClient();
 	xhr.open('GET','https://api.vineapp.com/timelines/popular?size=1');
