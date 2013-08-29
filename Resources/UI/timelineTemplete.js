@@ -3,7 +3,7 @@ exports.tableTemplete = function(dataArray){
 		width:Ti.UI.FILL,
 		height:Ti.UI.FILL,	
 		selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
-		backgroundColor:"#ffffff",
+		backgroundColor:"#F5F1E9",
 		prependMovie:"none"
 	});
 
@@ -22,6 +22,7 @@ exports.tableTemplete = function(dataArray){
 			if(e.source.video == undefined){
 				var video = Ti.Media.createVideoPlayer({
 				    backgroundColor : 'black',
+				    top:4,
 				    height : 300,
 				    width : 300,
 				    movieControlMode: Titanium.Media.VIDEO_CONTROL_HIDDEN,
