@@ -91,7 +91,7 @@ exports.myProfile = function(json){
 				var button = Ti.UI.createLabel({
 					// color : "#0c7ced",
 					color :"#ffffff",
-					backgroundColor:"#FDC44F",//#f39c12, #93B8CA, #FDC44F
+					backgroundColor:"#34495e",//#f39c12, #93B8CA, #FDC44F, #34495e, #2c3e50
 					//borderColor:"",
 					font: { fontSize: 14, 
 							fontWeight:'bold',
