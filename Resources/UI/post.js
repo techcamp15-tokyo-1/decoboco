@@ -1,7 +1,9 @@
 exports.postWindow = function(){
-	
-	Ti.App.xhr = Ti.Network.createHTTPClient();
-				
+	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,'capture0.mp4');
+	// if ( file.exists()){
+		// console.log('----------------------exist---line4-------------------------');
+		// file.deleteFile();
+	// }
 	var mainView = Ti.UI.createWindow({
 		width:"100%",
 		height:"100%",
@@ -58,12 +60,6 @@ exports.postWindow = function(){
 		// console.log('touchstart');
 		// console.log("-------------------------------------------");
 		cnt++;
-		
-		var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,'capture0.mp4');
-		// if ( file.exists()){
-			// console.log('----------------------exist----------------------------');
-			// file.deleteFile();
-		// }
 		
 		stopwatchCount = setInterval(function(){
 			if(stopwatchTime >= 6000){
@@ -153,15 +149,10 @@ exports.postWindow = function(){
 	
 	
 	function recordFinish(){
-		vineCameraView.stopButtonPressed();	
 		var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,'capture0.mp4');
-		console.log("---------------------------------------------------");
-		console.log(file);
-		console.log("---------------------------------------------------");
-		// if ( file.exists()){
-		// console.log('----------------------exist----------------------------');
-			// file.deleteFile();
-		// }
+		console.log("----------line149-----------------------------------------");
+		
+		vineCameraView.stopButtonPressed();
 		
 		var video = Titanium.Media.createVideoPlayer({
 		    movieControlMode:Titanium.Media.VIDEO_CONTROL_DEFAULT,
@@ -170,9 +161,11 @@ exports.postWindow = function(){
 		    media:file,
 		    top:5,
 		    width:"100%",
-			height:"50%",
+			height:"30%",
 		});
-		
+		if(file.exists()){
+			console.log("---------------yes-------------------");
+		}
 		var ConfirmationWindow = Ti.UI.createWindow({
 			width:"100%",
 			height:"100%",
@@ -201,10 +194,10 @@ exports.postWindow = function(){
 		});
 		
 		backButton2.addEventListener('singletap',function(){
-			// if ( file.exists()){
-				// console.log('----------------------exist----------------------------');
-				// file.deleteFile();
-			// }
+			if ( file.exists()){
+				console.log('----------------------exist---line196-------------------------');
+				file.deleteFile();
+			}
 			ConfirmationWindow.close();
 			ConfirmationWindow = null;
 			video = null;
@@ -225,42 +218,50 @@ exports.postWindow = function(){
 		okButton2.addEventListener('singletap',function(){
 			console.log("---------------------line223-------------------------");
 			// console.log(Ti.App.key);
-
-			Ti.App.xhr.open('PUT','https://media.vineapp.com/upload/videos/1.3.1.mp4');
+			var xhr = Ti.Network.createHTTPClient();
 			
-			Ti.App.xhr.setRequestHeader('Host',"media.vineapp.com");
-			Ti.App.xhr.setRequestHeader('Proxy-Connection',"keep-alive");
-			Ti.App.xhr.setRequestHeader('content-Type',"video/mp4");
-			Ti.App.xhr.setRequestHeader('X-Vine-Client',"ios/1.3.1");
-			Ti.App.xhr.setRequestHeader('Content-Length',"312112");
+			xhr.open('PUT','https://media.vineapp.com/upload/videos/1.3.1.mp4');
+			
+			xhr.setRequestHeader('Host',"media.vineapp.com");
+			xhr.setRequestHeader('Proxy-Connection',"keep-alive");
+			xhr.setRequestHeader('content-Type',"video/mp4");
+			xhr.setRequestHeader('X-Vine-Client',"ios/1.3.1");
+			xhr.setRequestHeader('Content-Length',file.size);
 			// xhr.setRequestHeader('RAW video',file);
-			Ti.App.xhr.setRequestHeader('Accept',"*/*");
-			Ti.App.xhr.setRequestHeader('vine-session-id',Ti.App.key);
-			Ti.App.xhr.setRequestHeader('Accept-Encoding',"gzip, deflate");
-			Ti.App.xhr.setRequestHeader('Connection',"keep-alive");
-			Ti.App.xhr.setRequestHeader('user-agent','iphone/1.3.1 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
-			Ti.App.xhr.setRequestHeader('Accept-Language','en;q=1, fr;q=0.9, de;q=0.8, ja;q=0.7, nl;q=0.6, it;q=0.5');
+			xhr.setRequestHeader('Accept',"*/*");
+			xhr.setRequestHeader('vine-session-id',Ti.App.key);
+			xhr.setRequestHeader('Accept-Encoding',"gzip, deflate");
+			xhr.setRequestHeader('Connection',"keep-alive");
+			xhr.setRequestHeader('user-agent','iphone/1.3.1 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
+			xhr.setRequestHeader('Accept-Language','en;q=1, fr;q=0.9, de;q=0.8, ja;q=0.7, nl;q=0.6, it;q=0.5');
 			
-			if ( file.exists()){
-			console.log('----------------------exist----------------------------');
-				// file.deleteFile();
-			}
 			
-			console.log(file);
-			// xhr.send(file);
-			Ti.App.xhr.send(file);
+			xhr.send(file);
+			//Ti.App.xhr.send(file);
 			
-			Ti.App.xhr.onload = function(e){
-				console.log(e);
-				// console.log(this.responseText);
-				// var str = require('lib/regex').prepareParse(this.responseText);
-				// console.log(str);
-				// var json = JSON.parse(str);
-				console.log("--------------------------------------------------");
-				console.log(this.responseText);
-				// console.log(json);
-				console.log("--------------------------------------------------");
+			xhr.onload = function(e){
+				console.log(xhr.getResponseHeader("X-Upload-Key")); //url for mp4
+				
+				// if ( file.exists()){
+					// console.log('----------------------exist--- line250-------------------------');
+					// file.deleteFile();
+				// }
+				// var createPost = Ti.UI.createWindow({
+					// width:"100%",
+					// height:"100%",
+					// backgroundColor:"#888888",
+					// modal:true,
+					// modalTransitionStyle: Ti.UI.iPhone.MODAL_TRANSITION_STYLE_FLIP_HORIZONTAL,
+			    	// modalStyle: Ti.UI.iPhone.MODAL_PRESENTATION_FULLSCREEN,
+			    	// navBarHidden:true
+				// });
+				 
 			};
+			xhr.onerror = function(e){
+				console.log("------------error-------------------");
+				console.log(e);
+			};
+			
 		});
 		
 		ConfirmationWindow.add(backButton2);
