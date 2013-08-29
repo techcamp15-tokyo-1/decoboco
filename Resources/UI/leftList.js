@@ -1,19 +1,33 @@
 exports.list = function(){
+	
+	const channelname = [
+						"Comedy","Art & Experimental","Cats",
+						"Dogs","Family","Beauty & Fashion","Health & Fitness",
+						"Nature","Music","News & Politics","Special FX","Sports","Urban","wier d"
+					  ];
+					  
 	var leftView = Ti.UI.createView({
 		left:-300,
 		height:Ti.UI.FILL,
 		width:200,
-		backgroundColor:"#111111",
-		opacity:0.7,
+		backgroundColor:"#7A7B7D",
+		opacity:0.97,
 		zindex:100000000000000
 	});
 	
 	var channelLabel = Ti.UI.createLabel({
 		text:"CHANNEL",
+		color:"#ffffff",
 		textalign:"center",
+		font:{
+			fontSize:30,
+			fontWeight:"bold",
+			fontFamily:'AppleGothic'
+		},
 		width:Ti.UI.FILL,
 		height:50,
-		left:5
+		left:5,
+		top:0
 	});
 	
 	leftView.add(channelLabel);
@@ -28,26 +42,7 @@ exports.list = function(){
 	
 	//require('UI/explore').explore();
 	
-	// var data = [
-				// {
-				 // comedy:"Comedy",
-				 // art_Experimental:"Art & Experimental",
-				 // cats:"Cats",
-				 // dogs:"Dogs",
-				 // family:"Family",
-				 // beauty_fashion:"Beauty & Fashion",
-				 // health_fitness:"Health & Fitness",
-				 // nature:"Nature",
-				 // music:"Music",
-				 // news_politics:"News & Politics",
-				 // spcial_FX:"Special FX",
-				 // sports:"Sports",
-				 // Urban:"Urban",
-				 // wier_d:"wier d",
-				// }
-			// ];
-	
-	tableView.data = makeRow();
+	tableView.data = makeRow(channelname);
 
 	leftView.add(tableView);
 	var animation = Ti.UI.createAnimation({
@@ -63,7 +58,7 @@ exports.list = function(){
 	});
 	
 	scrollView.addEventListener('swipe',function(e){
-		console.log(e);
+		// console.log(e);
 		if(e.direction == "left"){
 			var animation2 =Ti.UI.createAnimation({
 				duration:250,
@@ -83,23 +78,30 @@ exports.list = function(){
 	
 	Ti.App.win_base.add(scrollView);
 	Ti.App.win_base.add(leftView);
-	
+
 	function makeRow(channelname){
 		var res = [];
-		for(var i=0;i< 15;i++){
+		for(var i in channelname){
 			var row = Ti.UI.createTableViewRow({
-				height:40,
+				height:50,
 				width:Ti.UI.FILL
 			});
 			var label = Ti.UI.createLabel({
 				width:Ti.UI.FILL,
-				height:40,
-				text:channelname
+				height:50,
+				color:"#ffffff",
+				font:{
+					fontSize:20,
+					fontWeight:"bold",
+					fontFamily: 'AppleGothic',
+				},
+				text:" "+channelname[i],
 			});
 			row.add(label);
 			res.push(row);
+			//console.log(label);
 		}
-		return row;
+		return res;
 	}
 };
 

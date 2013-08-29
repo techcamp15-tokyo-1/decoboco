@@ -53,7 +53,7 @@ exports.signSelect = function(){
 				fontWeight:"bold",
 				fontFamily: 'AppleGothic',
 			},
-			borderRadius:"0.8"
+			//borderRadius:"0.8"
 		});
 
 		var signUpButton = Ti.UI.createLabel({
@@ -71,7 +71,7 @@ exports.signSelect = function(){
 				fontWeight:"bold",
 				fontFamily: 'AppleGothic',
 			},
-			borderRadius:"0.5"
+			//borderRadius:"0.5"
 		});
 	
 	

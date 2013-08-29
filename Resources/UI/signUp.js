@@ -49,7 +49,7 @@ exports.signUp = function(json){
 		textAlign:"center",
 		left:0,
 //		top:"10%"
-		top:"15%"
+		top:"5%"
 	});
 	
 	
@@ -71,8 +71,9 @@ exports.signUp = function(json){
 	// var Label2 = createHintLabel("Password", "5%");
 	
 	var signUpThumbnail = Ti.UI.createImageView({
-		top:"3%",
-		left:85,
+		//top:"3%",
+		//left:85,
+		center:{x:130,y:40}, 
 		weight:"20%",
 		height:"20%",
 		image:"/images/image.png",
@@ -80,11 +81,60 @@ exports.signUp = function(json){
 	});
 
 	signUpThumbnail.addEventListener('singletap',function(){
-		//image2.png
-//takePhoto
-//select image from gallary
-	console.log("image");
+		//image2.png//takePhoto		
+		Ti.Media.openPhotoGallery({
+	            success : function(e) {
+	            	console.log(e);
+		            //var photo = event.media.imageAsThumbnail(80);//100はサムネイル写真のサイズを設定する（１００＊１００)
+					signUpThumbnail.image = e.media;
+					signUpButton.imageFlga = true;
+		            },
+		            error : function(error) {
+		            	console.log(error);
+		            },
+		            cancel : function() {
+		                // キャンセル時の挙動
+		                console.log('cancel');
+		            },error:function(){alert('erroe');},
+		            // 選択直後に拡大縮小移動をするか否かのフラグ
+		            allowEditing : false,
+		            // 選択可能なメディア種別を配列で指定
+		            mediaTypes : [Ti.Media.MEDIA_TYPE_PHOTO]
+		 });
 
+
+		// Ti.Media.showCamera({
+	    // // JSON形式の引数です
+	    // success:function(event){
+	        // // cropRectにはx,y,height,widthといったデータがはいる。
+	        // var cropRect = event.cropRect;
+	        // var image    = event.media;
+// 	
+	        // // 撮影されたデータが写真ならばImageViewとしてWindowに貼り付ける
+	        // if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO){
+	            // var imageView = Ti.UI.createImageView({
+	                // width:win.width,
+	                // height:win.height,
+	                // image:event.media
+	            // });
+	            // win.add(imageView);  
+	        // }
+	    // },
+	    // cancel:function(){
+// 	        
+	    // },
+	    // error:function(error){
+	        // // errorとしてカメラがデバイスにないようなケース(iPod touchなどがそうでしょうか)では
+	        // // error.code が Titanium.Media.NO_CAMERA として返ります。
+	    // },
+	    // // 撮影データのフォトギャラリーへの保存
+	    // saveToPhotoGallery:true,
+	    // // 撮影直後に拡大縮小移動をするか否かのフラグ
+	    // allowEditing:true,
+	    // // 撮影可能なメディア種別を配列で指定
+	    // mediaTypes:[Ti.Media.MEDIA_TYPE_VIDEO,Ti.Media.MEDIA_TYPE_PHOTO],
+// 	
+	    // });
 
 	});
 
@@ -108,7 +158,7 @@ exports.signUp = function(json){
 				fontFamily: 'AppleGothic',
 			},
 		    keyboardType:Ti.UI.KEYBOARD_DEFAULT,
-		    returnKeyType:Ti.UI.RETURNKEY_SEND,
+		    returnKeyType:Ti.UI.RETURNKEY_OK,
 		    borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		});
 		return userIdLabel;
@@ -135,7 +185,8 @@ exports.signUp = function(json){
 			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
-		borderRadius:"0.5"
+		//borderRadius:"0.5",
+		
 	});
 	
 	
@@ -154,7 +205,7 @@ exports.signUp = function(json){
 			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
-		borderRadius:"0.8"
+		//borderRadius:"0.8"
 	});
 	
 	cancelButton.addEventListener('singletap',function(){
@@ -165,6 +216,9 @@ exports.signUp = function(json){
 
 	
 	signUpButton.addEventListener('singletap',function(){
+		if(signUpButton.imageFlag){
+			//API
+		}
 		if(userNameLabel.value != "" && userIdLabel.value != "" && passwordLabel.value != ""){
 			require('lib/vineAPI').vineSignUp(userIdLabel.value,passwordLabel.value,userNameLabel.value);
 		}

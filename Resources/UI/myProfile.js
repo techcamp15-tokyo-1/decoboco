@@ -25,31 +25,33 @@ exports.myProfile = function(json){
 	
 	function createView(json){
 		
-		var profView = Ti.UI.createView({
+		var profView = Ti.UI.createScrollView({
 				width:Ti.UI.FILL,
 				height:Ti.UI.FILL,
 				layout:"vertical",
 				top:0,
-				color:"#ffffff"
+				backgroundColor:"#F5F1E9"//#DED7CE
 			});
 
 			// console.log(json);
 			
 			var profileImage = Ti.UI.createImageView({
 				Align:'center',
-				top:"3%",
-				borderColor:"#345600",
-				width:90,
-				height:90,
-				image:json.data.avatarUrl
+				top:"5%",
+				borderColor:"#DED7CF",
+				width:130,
+				height:130,
+				image:json.data.avatarUrl,
+				//borderRadius: 8
 			});
 			
 			var usernameLabel = Ti.UI.createLabel({
 				top:"3%",
+				left:75,
 				text:json.data.username,
-				font: { fontSize: 20, fontFamily: 'AppleGothic', } ,
-				textAlign: 'center',
-				color:"#000"
+				font: { fontSize: 25, fontWeight:'bold', fontFamily: 'AppleGothic', } ,
+				textAlign: 'left',
+				color:"#2c3e50"
 			});
 			
 			// var userIdLabel = Ti.UI.createLabel({
@@ -61,24 +63,25 @@ exports.myProfile = function(json){
 			// });
 			
 			var profileTextLabel = Ti.UI.createLabel({
-				top:"5%",
-				width:"60%",
+				top:"1%",
+				width:180,
 				height:Ti.UI.SIZE,
-				
+				Align:"center",
 				text:json.data.description,
 				// text:json.data.records.username;
 				font: { fontSize: 15, 
 						fontFamily: 'AppleGothic',
 						} ,
 				//textAlign:'center',
-				color:"#000",
+				color:"#2c3e50",
 				
 			});
 			
 			var buttonView = Ti.UI.createView({
 				width:Ti.UI.FILL,
-				top:"10%",
+				top:"5%",
 				height:35,
+				left:"21%",
 				// top:,
 				// bottom:,
 				layout:"horizontal"
@@ -86,23 +89,27 @@ exports.myProfile = function(json){
 			
 			createLabel = function(text,left){
 				var button = Ti.UI.createLabel({
-					color : "#000000",
-					backgroundColor:"#00ccff",
-					borderColor:"#345600",
-					font: { fontSize: 15, 
+					// color : "#0c7ced",
+					color :"#ffffff",
+					backgroundColor:"#FDC44F",//#f39c12, #93B8CA, #FDC44F
+					//borderColor:"",
+					font: { fontSize: 14, 
+							fontWeight:'bold',
 							fontFamily: 'AppleGothic', 
 							} ,
-					text : text,
+					text:text,
+					top:-2,
 					textAlign:'center',
 					left:left,
-					width:"40%",
-				    height:30
+					width:"35%",
+				    height:40,
+				    //borderRadius: 10
 				});
 				return button;
 			};
 
-		var followersButton = createLabel("FOLLOWERS","10%");
-		var followingButton = createLabel("FOLLOWING","2%");
+		var followersButton = createLabel("FOLLOWERS",0);
+		var followingButton = createLabel("FOLLOWING","3%");
 				
 			followersButton.addEventListener('singletap',function(){
 				console.log("Followers");

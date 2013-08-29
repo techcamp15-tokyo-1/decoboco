@@ -75,7 +75,7 @@ exports.signIn = function(){
 				fontFamily: 'AppleGothic',
 			},
 		    hintText:text,
-		    returnKeyType:Titanium.UI.RETURNKEY_SEND,
+		    returnKeyType:Titanium.UI.RETURNKEY_OK,
 		    keyboardType:Titanium.UI.KEYBOARD_DEFAULT,
 		    borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
 		});
@@ -111,7 +111,7 @@ exports.signIn = function(){
 			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
-		borderRadius:"0.8"
+		//borderRadius:"0.8"
 	});
 
 	signInButton.addEventListener('singletap',function(){
@@ -135,7 +135,7 @@ exports.signIn = function(){
 			fontWeight:"bold",
 			fontFamily: 'AppleGothic',
 		},
-		borderRadius:"0.8"
+		//borderRadius:"0.8"
 	});
 	
 	cancelButton.addEventListener('singletap',function(){
