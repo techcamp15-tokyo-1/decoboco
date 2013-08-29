@@ -4,15 +4,8 @@
 (function(){
 	Ti.App.disableNetworkActivityIndicator = true; //ネットワークインジゲータを消す
 	///////////
-	// require('lib/vineAPI').vineNewLogin('e.takumi.89@gmail.com','techcamptech','TechcampTakumi');
-	// require('lib/vineAPI').vineNewLogin('higezizii-tansoku-choko-about@about-hiroppy.com','about19920429','about_hiroppy_test');
-	// var b = require('com.HjAboutHiroppy.VineCamera');
 	// var v = b.createView();
 	// console.log(v);
-	
-	
-	//require('lib/vineAPI').vineLogin('dreams.come.true.about@gmail.com','about19920429');
-	// require('lib/vineAPI').vineLogin('e.takumi.89@gmail.com','8Gatu9Ka');
 	
 	tab_group = Ti.UI.createTabGroup();
 	
@@ -22,7 +15,7 @@
 		backgroundColor:"#eeeeee",
 		navBarHidden: true,
 		tabBarHidden: true,
-		fullscreen : false,  
+		fullscreen : false, 
 	});
 	
 	
@@ -47,7 +40,7 @@
 	}
 	
 	function start(){
-				var dummyWindow = [];
+		var dummyWindow = [];
 	    
 	    //この個数は変動
 	    for(var i=0;i<4;i++){
