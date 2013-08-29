@@ -12,13 +12,13 @@
 	//一番下のベースLayer
 	Ti.App.win_base = Ti.UI.createWindow({
 		// backgroundImage: 'image/background.jpg',
-		backgroundColor:"#DED7CF",
+		backgroundColor:"#F5F1E9",
 		navBarHidden: true,
 		tabBarHidden: true,
 		fullscreen : false, 
 	});
 	
-	
+
 	var tab = Ti.UI.createTab({ window: Ti.App.win_base });
 	tab_group.addTab(tab);
 	tab_group.open();
@@ -47,7 +47,7 @@
 		    var w = Ti.UI.createWindow({
 			    width:"100%",
 			    height:Ti.UI.FILL,
-			    backgroundColor:"#E8E5C8",
+			    backgroundColor:"#F5F1E9",
 		    });
 		    dummyWindow.push(w);	
 	    }
@@ -138,7 +138,7 @@
 			    fontSize: 25, 
 			    fontFamily: 'AppleGothic'
 		    },
-		    color:"#fff",
+		    color:"#d3c2ad",
 		    textAlign:'center',
 		    bubbleParent:false
 	    });
@@ -160,7 +160,7 @@
 	    var topLabelNameArray = [];
 	    topLabelNameArray[0]= "TIMELINE";
 	    topLabelNameArray[1]= "ACTIVITY";
-	    topLabelNameArray[2]= "EXPLOPE";
+	    topLabelNameArray[2]= "EXPLORE";
 	    topLabelNameArray[3]= "PROFILE";
 	    
 	    
