@@ -1,10 +1,23 @@
 exports.list = function(){
+	var channelname = [];
+	var xhr = Ti.Network.createHTTPClient();
+	xhr.open('GET','https://api.vineapp.com/channels/featured');
+	xhr.setRequestHeader('vine-session-id',Ti.App.key);
+	xhr.send();	
 	
-	const channelname = [
-						"Comedy","Art & Experimental","Cats",
-						"Dogs","Family","Beauty & Fashion","Health & Fitness",
-						"Nature","Music","News & Politics","Special FX","Sports","Urban","wier d"
-					  ];
+	xhr.onload = function(){
+		var json = JSON.parse(this.responseText);
+		// console.log(json);
+		for(var i=0;i<json.data.records.length;i++){
+			channelname.push(json.data.records[i].channel);
+		}
+		tableView.data = makeRow(channelname);
+	};
+	// const channelname = [
+						// "comedy","art & experimental","cats",
+						// "dogs","family","beauty & fashion","health & fitness",
+						// "nature","music","news & politics","special FX","sports","urban","wier d"
+					  // ];
 					  
 	var leftView = Ti.UI.createView({
 		left:-300,
@@ -42,7 +55,6 @@ exports.list = function(){
 	
 	//require('UI/explore').explore();
 	
-	tableView.data = makeRow(channelname);
 
 	leftView.add(tableView);
 	var animation = Ti.UI.createAnimation({
@@ -98,10 +110,8 @@ exports.list = function(){
 				text:" "+channelname[i],
 			});
 			row.addEventListener('singletap',function(e){
-
-
-			require('UI/explore').explore();
-
+				// console.log(e);
+				require('UI/tag').makingTable(e.index+1);
 			});
 
 			row.add(label);

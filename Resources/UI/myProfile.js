@@ -16,7 +16,7 @@ exports.myProfile = function(){
 	    else{
 	    	console.log("------line23------------ myprofile----------");
 	    	//Ti.App.fireEvent('GetProfileComplete');
-	    	console.log(json);
+	    	// console.log(json);
 	    	// console.log(json.data.records[0].videoUrl)
 	    	var v = createView(json);								
 	    	Ti.App.scrollview.views[3].add(v);
@@ -373,7 +373,24 @@ exports.myProfile = function(){
 			return row;
 		}
 		
+	// var xhr = Ti.Network.createHTTPClient();
+	// //login
+	// xhr.open('GET','https://api.vineapp.com/timelines/users/me');
+// 	
+	// xhr.send();
+// 	
+	// xhr.onload = function(){
+		// var str = require('lib/prepareParse').prepareParse(this.responseText);
+		// var json = JSON.parse(str);
+	    // if(json.error != "") alert('error');
+	    // else{
+	    	// console.log(this.responseText);
+	    // }
+	// };
+	
+	
+	
 		
-	    return profView;
+	return profView;
 	}
 };

@@ -58,26 +58,28 @@ exports.vineLogin = function(username,password){
 	};
 };
 
-exports.vineGraphTimeLine = function(){
+exports.vineGraphTimeLine = function(type,Id,firstFlg){
 	var xhr = Ti.Network.createHTTPClient();
-	xhr.open('GET','https://api.vineapp.com/timelines/graph');
-	
-	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
+	if(type == "up") xhr.open('GET','https://api.vineapp.com/timelines/graph');
+	else xhr.open('GET','https://api.vineapp.com/timelines/graph?page='+Id);
 	xhr.setRequestHeader('vine-session-id',Ti.App.key);
-	
-	xhr.send();
+	xhr.send();	
 	
 	xhr.onload = function(){
-		// var json = JSON.parse(this.responseText);
-		console.log(this.responseText);
 		var str = require('lib/regex').prepareParse(this.responseText);
-		console.log(str);
 		var json = JSON.parse(str);
+		// console.log(str);
 	    if(json.error != "") alert('error');
 	    else{
 	    	var data = require('lib/parseJson').parseJson(json);
-	    	// console.log(require('UI/timelineTemplete').tableTemplete(data));
-	    	Ti.App.scrollview.views[0].add(require('UI/timelineTemplete').tableTemplete(data));
+	    	var array = [];
+	    	for(var i=0; i < data.length;i++){
+	    		// console.log(data[i].postId+" "+leastId);
+	    		if(data[i].postId <= Id && type == "up") break;
+	    		else array.push(data[i]);
+	    	}
+	    	if(firstFlg) Ti.App.fireEvent('vineGraphTimeLineFirst',{res:array});
+	    	else Ti.App.fireEvent('vineGraphTimeLineAfter',{res:array,eventtype:type});
 	    }
 	};
 };
@@ -102,33 +104,65 @@ exports.vineExploreTimeLine = function(channelId){
 	    else{
 	    	var data = require('lib/parseJson').parseJson(json);
 	    	// console.log(require('UI/timelineTemplete').tableTemplete(data));
-	    	Ti.App.scrollview.views[0].add(require('UI/explore').tableTemplete(data));
+	    	// Ti.App.scrollview.views[0].add(require('UI/explore').tableTemplete(data));
 	    }
 	};
 };
 
-
-
-
-
-exports.vinePopularTimeLine = function(){
+exports.vinePopularTimeLine = function(type,Id,firstFlg){
+	// console.log("Asdasfdsf");
 	var xhr = Ti.Network.createHTTPClient();
-	xhr.open('GET','https://api.vineapp.com/timelines/popular?size=1');
-	
-	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
+	if(type == "up") xhr.open('GET','https://api.vineapp.com/timelines/popular');
+	else xhr.open('GET','https://api.vineapp.com/timelines/channels/popular?page='+Id);
 	xhr.setRequestHeader('vine-session-id',Ti.App.key);
-	
-	xhr.send();
+	xhr.send();	
 	
 	xhr.onload = function(){
-		// var str = require('lib/prepareParse').prepareParse(this.responseText);
-		// var json = JSON.parse(str);
-	    // if(json.error != "") alert('error');
-	    // else{
-	    // //result
-		// // console.log(json);
-		// // return json;
-	    // }
+		var str = require('lib/regex').prepareParse(this.responseText);
+		var json = JSON.parse(str);
+		// console.log(str);
+	    if(json.error != "") alert('error');
+	    else{
+	    	var data = require('lib/parseJson').parseJson(json);
+	    	var array = [];
+	    	for(var i=0; i < data.length;i++){
+	    		// console.log(data[i].postId+" "+leastId);
+	    		if(data[i].postId <= Id && type == "up") break;
+	    		else array.push(data[i]);
+	    	}
+	    	if(firstFlg) Ti.App.fireEvent('vinePopularTimeLineFirst',{res:array});
+	    	else Ti.App.fireEvent('vinePopularTimeLineAfter',{res:array,eventtype:type});
+	    }
+	};
+	xhr.onerror = function(){
+	};
+};
+
+exports.vineRiseTimeLine = function(type,Id,firstFlg){
+	var xhr = Ti.Network.createHTTPClient();
+	if(type == "up") xhr.open('GET','https://api.vineapp.com/timelines/users/trending');
+	else xhr.open('GET','https://api.vineapp.com/timelines/users/trending?page='+Id);
+	xhr.setRequestHeader('vine-session-id',Ti.App.key);
+	xhr.send();	
+	
+	xhr.onload = function(){
+		var str = require('lib/regex').prepareParse(this.responseText);
+		var json = JSON.parse(str);
+		// console.log(str);
+	    if(json.error != "") alert('error');
+	    else{
+	    	var data = require('lib/parseJson').parseJson(json);
+	    	var array = [];
+	    	for(var i=0; i < data.length;i++){
+	    		// console.log(data[i].postId+" "+leastId);
+	    		if(data[i].postId <= Id && type == "up") break;
+	    		else array.push(data[i]);
+	    	}
+	    	if(firstFlg) Ti.App.fireEvent('vineRiseTimeLineFirst',{res:array});
+	    	else Ti.App.fireEvent('vineRiseTimeLineAfter',{res:array,eventtype:type});
+	    }
+	};
+	xhr.onerror = function(){
 	};
 };
 
@@ -159,48 +193,34 @@ exports.myProfile = function(){
 	};
 };
 
-// 
-// exports.userData = function(userid){/////////error
-// var xhr = Ti.Network.createHTTPClient();
-// xhr.open('GET','https://api.vineapp.com/users/profiles/'+userid);
-// console.log(userid);
-// // xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
-// 	
-// xhr.setRequestHeader('vine-session-id',Ti.App.key);
-// 	
-// xhr.send();
-// 	
-// xhr.onload = function(){
-// var str = require('lib/prepareParse').prepareParse(this.responseText);
-// var json = JSON.parse(str);
-// if(json.error != "") alert('error');
-// else{
-// xhr = null;
-// console.log(json);
-// // return json;
-// }
-// };
-// };
 
-
-exports.tag = function(tag){
+exports.vineTagTimeLine = function(tagName,type,Id,firstFlg){
+	// console.log("Asdasfdsf");
 	var xhr = Ti.Network.createHTTPClient();
-	xhr.open('GET','https://api.vineapp.com/timelines/tags/'+tag);//<tag>
-	
-	// xhr.setRequestHeader('user-agent','com.vine.iphone/1.0.3 (unknown, iPhone OS 6.1.0, iPhone, Scale/2.000000)');
+	if(type == "up") xhr.open('GET','https://api.vineapp.com/timelines/channels/'+tagName+'/popular');
+	else xhr.open('GET','https://api.vineapp.com/timelines/channels/'+tagName+'/popular?page='+Id);
 	xhr.setRequestHeader('vine-session-id',Ti.App.key);
-	
-	xhr.send();
+	xhr.send();	
 	
 	xhr.onload = function(){
-		var str = require('lib/prepareParse').prepareParse(this.responseText);
+		var str = require('lib/regex').prepareParse(this.responseText);
 		var json = JSON.parse(str);
+		// console.log(str);
 	    if(json.error != "") alert('error');
 	    else{
-	    	Ti.App.fireEvent('userTagComplete');
-	    	// console.log(json);
-	    	return json;
+	    	var data = require('lib/parseJson').parseJson(json);
+	    	var array = [];
+	    	for(var i=0; i < data.length;i++){
+	    		// console.log(data[i].postId+" "+leastId);
+	    		if(data[i].postId <= Id && type == "up") break;
+	    		else array.push(data[i]);
+	    	}
+	    	if(firstFlg) Ti.App.fireEvent('vineTagTimeLineFirst',{res:array});
+	    	else Ti.App.fireEvent('vineTagTimeLineAfter',{res:array,eventtype:type});
 	    }
+	};
+	xhr.onerror = function(){
+		console.log("error line214");
 	};
 };
 
@@ -237,10 +257,24 @@ exports.PostLike = function(id){
 	xhr.onload = function(){
 		var str = require('lib/prepareParse').prepareParse(this.responseText);
 		var json = JSON.parse(str);
-	    if(json.error != "") alert('error');
+	    if(json.error != ""){
+	    	require('/UI/alert').message_view("error","error");
+	    }
 	    else{
-	    	console.log(json);
+	    	require('/UI/alert').message_view("Post like");
 	    }
 	};	
+};
+
+exports.myPostDelete = function(id){
+	var xhr = Ti.Network.createHTTPClient();
+	xhr.open('DELETE','https://api.vineapp.com/posts/'+id);
+	xhr.setRequestHeader('vine-session-id',Ti.App.key);
+	xhr.send();
+	
+	xhr.onload = function(){
+		require('/UI/alert').message_view("delete your post");
+	};	
+	
 };
 

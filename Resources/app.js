@@ -1,4 +1,3 @@
-//将来的にxmlにパスワードとusernameを保存する
 //他のwindowへのアクセス方法　Ti.App.scrollview.views[index]
 
 (function(){
@@ -61,7 +60,7 @@
 		    // left:"20%",
 		    views:dummyWindow,
 		    horizontalBounce:false,
-		    cacheSize:6,
+		    cacheSize:7,
 		    // showPagingControl: true,
             // pagingControlHeight: 30,
 	    });
@@ -82,10 +81,10 @@
 		    return button;
 	    };
 	    
-	    var homeButton = createImages("images/home2.png",17);
+	    // var homeButton = createImages("images/home2.png",17);
 	    var listButton = createImages("images/list.png",17);
 	    var cameraButton = createImages("images/videocamera.png",153);
-	    var searchButton = createImages("images/search.png",285);
+	    var HomeButton = createImages("images/home2.png",285);
 	    
 	    listButton.addEventListener('singletap',function(){
 		    require('UI/leftList').list();	
@@ -93,6 +92,10 @@
 	    
 	    cameraButton.addEventListener('singletap',function(){
 		    require('UI/post').postWindow();
+	    });
+	    
+	    HomeButton.addEventListener('singletap',function(){
+	    	Ti.App.scrollview.scrollToView(0);
 	    });
 	    
 	    //可視化用
@@ -108,7 +111,7 @@
 	    //buttonBar.add(homeButton);
 	    buttonBar.add(listButton);
 	    buttonBar.add(cameraButton);
-	    buttonBar.add(searchButton);
+	    buttonBar.add(HomeButton);
 
 	    var homebuttonBar = Ti.UI.createView({
 		    width:"20%",
@@ -119,9 +122,9 @@
 		    bubbleParent:false
 	    });
 	    
-	    homebuttonBar.addEventListener('singletap',function(){
-		    Ti.App.scrollview.scrollToView(0);
-	    });
+	    // homebuttonBar.addEventListener('singletap',function(){
+		    // Ti.App.scrollview.scrollToView(0);
+	    // });
 	    
 
 	    // homebuttonBar.add(homeButton);
@@ -132,7 +135,7 @@
 		    height:"10%",
 		    top:0,
 		    backgroundColor:"#00a478",
-		    text:"TIMELINE",
+		    text:"Home",
 		    font:{
 			    fontWeight: "normal", 
 			    fontSize: 25, 
@@ -144,7 +147,7 @@
 	    });
 	    
 	    topLabel.add(homebuttonBar);
-	    homebuttonBar.add(homeButton);
+	    // homebuttonBar.add(homeButton);
 	    
 	    homebuttonBar.addEventListener('singletap',function(e){
 		    
@@ -158,9 +161,9 @@
 	    ///////////////////////////////////////////////
 	    //Labelとscrollableview
 	    var topLabelNameArray = [];
-	    topLabelNameArray[0]= "TIMELINE";
-	    topLabelNameArray[1]= "ACTIVITY";
-	    topLabelNameArray[2]= "EXPLORE";
+	    topLabelNameArray[0]= "Home";
+	    topLabelNameArray[1]= "Popular";
+	    topLabelNameArray[2]= "On the rise";
 	    topLabelNameArray[3]= "PROFILE";
 	    
 	    
@@ -207,30 +210,13 @@
 	    			cnt++;
 	    		});
 	    	}
-		    console.log('login');
-		    
-		    // require('lib/vineAPI').vinePopularTimeLine();
-		    
-		    // Ti.App.scrollview.views[0].add(require('UI/myTimeline').myTimeline());
-		    //test
-		    //require('UI/newLogin').newLogin();
-
-
-		    // require('UI/signIn').signIn();
-		    // require('UI/myProfile').myProfile();
-		    // require('lib/vineAPI').myProfile();	
-		    // require('lib/vineAPI').vineGraphTimeLine();
-
-
-		    //require('lib/vineAPI').userData();
-		    //require('lib/vineAPI').vineLogin();
-		    
-		    
+	    	
 		    require('UI/myProfile').myProfile();
 		    require('lib/vineAPI').myProfile();
-		    
-		    require('lib/vineAPI').vineGraphTimeLine();
-		    //require('lib/vineAPI').userData();		
+		    require('UI/graphTimeLine').makingTable();
+		    require('UI/popular').makingTable();
+		    require('UI/onTheRise').makingTable();
+		    // Ti.App.scrollview.views[0].add(require('UI/graphTimeLine').makingTable());
 	    });
 	}	
 })();
